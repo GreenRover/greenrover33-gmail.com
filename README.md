@@ -34,3 +34,5 @@
 - Security: CORS + OAuth
 - Spring JMS
 - Spring cloud stream
+- Reactive programming with Spring (alternatives)
+- Testing of reactive applications (e.g. based on RxJS/RxJava): unit testing, intergration tests, e2e?
