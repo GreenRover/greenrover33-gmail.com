@@ -11,6 +11,9 @@
 - Spring boot project setup
 - First hello world rest controller
 
+- https://developer.okta.com/blog/2018/08/22/basic-crud-angular-7-and-spring-boot-2
+- https://medium.com/@majdasab/integrating-an-angular-project-with-spring-boot-e3a043b7307b
+
 #### Requirements:
 - java
 - maven
