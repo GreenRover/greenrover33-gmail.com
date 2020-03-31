@@ -20,6 +20,7 @@
 
 ## Subject backlog
 - Angular project setup + hello world
+- Angular and Spring (rest-calls and serve together)
 - Typescript and webpack
 - Angular unit tests
 - Spring JPA
