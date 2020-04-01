@@ -1,0 +1,583 @@
+openapi: 3.0.1
+info:
+  title: Roler coaster manager
+  description: Sample application to manage roaler coaster
+  contact:
+    email: tms@sbb.ch
+  version: 1.0.0
+  license:
+    name: SBB
+    url: 'https://developer.sbb.ch/license'
+servers:
+  - url: 'https://myhost.sbb.ch/v1'
+paths:
+  /design:
+    post:
+      tags:
+        - design
+      summary: |
+        Create and design.
+      operationId: createDesign
+      requestBody:
+        description: Create an design object.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Design'
+        required: true
+      responses:
+        '201':
+          description: Design successfully created
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '422':
+          description: Unprocessable entity
+          content: {}
+      x-codegen-request-body-name: body
+    get:
+      tags:
+        - design
+      summary: 'Returns a list of all designs.'
+      operationId: getDesigns
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DesignList'
+        '422':
+          description: Unprocessable entity
+          content: {}
+  '/design/{id}':
+    put:
+      tags:
+        - design
+      summary: Update an design object.
+      operationId: updateDesign
+      parameters:
+        - name: id
+          in: path
+          description: The id of the design.
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Update an design object.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Design'
+        required: true
+      responses:
+        '204':
+          description: Design successfully updated
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '422':
+          description: Unprocessable entity
+          content: {}
+      x-codegen-request-body-name: body
+    delete:
+      tags:
+        - design
+      summary: Delete a design object.
+      operationId: deleteDesign
+      parameters:
+        - name: id
+          in: path
+          description: The id of the design.
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Design successfully deleted
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '422':
+          description: Unprocessable entity
+          content: {}
+      x-codegen-request-body-name: body
+  /location:
+    post:
+      tags:
+        - location
+      summary: |
+        Create and location.
+      operationId: createLocation
+      requestBody:
+        description: Create an location object.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+        required: true
+      responses:
+        '201':
+          description: Location successfully created
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '422':
+          description: Unprocessable entity
+          content: {}
+      x-codegen-request-body-name: body
+    get:
+      tags:
+        - location
+      summary: 'Returns a list of all locations.'
+      operationId: getLocations
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationList'
+        '422':
+          description: Unprocessable entity
+          content: {}
+  '/location/{id}':
+    put:
+      tags:
+        - location
+      summary: Update an location object.
+      operationId: updateLocation
+      parameters:
+        - name: id
+          in: path
+          description: The id of the location.
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Update an location object.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+        required: true
+      responses:
+        '204':
+          description: Location successfully updated
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '422':
+          description: Unprocessable entity
+          content: {}
+      x-codegen-request-body-name: body
+    delete:
+      tags:
+        - location
+      summary: Delete a location object.
+      operationId: deleteLocation
+      parameters:
+        - name: id
+          in: path
+          description: The id of the location.
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Location successfully deleted
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '422':
+          description: Unprocessable entity
+          content: {}
+      x-codegen-request-body-name: body
+  /typ:
+    post:
+      tags:
+        - typ
+      summary: |
+        Create and typ.
+      operationId: createTyp
+      requestBody:
+        description: Create an typ object.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Typ'
+        required: true
+      responses:
+        '201':
+          description: Typ successfully created
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '422':
+          description: Unprocessable entity
+          content: {}
+      x-codegen-request-body-name: body
+    get:
+      tags:
+        - typ
+      summary: 'Returns a list of all typs.'
+      operationId: getTyps
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TypList'
+        '422':
+          description: Unprocessable entity
+          content: {}
+  '/typ/{id}':
+    put:
+      tags:
+        - typ
+      summary: Update an typ object.
+      operationId: updateTyp
+      parameters:
+        - name: id
+          in: path
+          description: The id of the typ.
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Update an typ object.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Typ'
+        required: true
+      responses:
+        '204':
+          description: Typ successfully updated
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '422':
+          description: Unprocessable entity
+          content: {}
+      x-codegen-request-body-name: body
+    delete:
+      tags:
+        - typ
+      summary: Delete a typ object.
+      operationId: deleteTyp
+      parameters:
+        - name: id
+          in: path
+          description: The id of the typ.
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Typ successfully deleted
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '422':
+          description: Unprocessable entity
+          content: {}
+      x-codegen-request-body-name: body
+  /status:
+    post:
+      tags:
+        - status
+      summary: |
+        Create and status.
+      operationId: createStatus
+      requestBody:
+        description: Create an status object.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Status'
+        required: true
+      responses:
+        '201':
+          description: Status successfully created
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '422':
+          description: Unprocessable entity
+          content: {}
+      x-codegen-request-body-name: body
+    get:
+      tags:
+        - status
+      summary: 'Returns a list of all statuss.'
+      operationId: getStatus
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusList'
+        '422':
+          description: Unprocessable entity
+          content: {}
+  '/status/{id}':
+    put:
+      tags:
+        - status
+      summary: Update an status object.
+      operationId: updateStatus
+      parameters:
+        - name: id
+          in: path
+          description: The id of the status.
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Update an status object.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Status'
+        required: true
+      responses:
+        '204':
+          description: Status successfully updated
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '422':
+          description: Unprocessable entity
+          content: {}
+      x-codegen-request-body-name: body
+    delete:
+      tags:
+        - status
+      summary: Delete a status object.
+      operationId: deleteStatus
+      parameters:
+        - name: id
+          in: path
+          description: The id of the status.
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Status successfully deleted
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '422':
+          description: Unprocessable entity
+          content: {}
+      x-codegen-request-body-name: body
+  /coaster:
+    post:
+      tags:
+        - coaster
+      summary: |
+        Create and coaster.
+      operationId: createCoaster
+      requestBody:
+        description: Create an coaster object.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Coaster'
+        required: true
+      responses:
+        '201':
+          description: Coaster successfully created
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '422':
+          description: Unprocessable entity
+          content: {}
+      x-codegen-request-body-name: body
+    get:
+      tags:
+        - coaster
+      summary: 'Returns a list of all coasters.'
+      operationId: getCoasters
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CoasterList'
+        '422':
+          description: Unprocessable entity
+          content: {}
+  '/coaster/{id}':
+    put:
+      tags:
+        - coaster
+      summary: Update an coaster object.
+      operationId: updateCoaster
+      parameters:
+        - name: id
+          in: path
+          description: The id of the coaster.
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Update an coaster object.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Coaster'
+        required: true
+      responses:
+        '204':
+          description: Coaster successfully updated
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '422':
+          description: Unprocessable entity
+          content: {}
+      x-codegen-request-body-name: body
+    delete:
+      tags:
+        - coaster
+      summary: Delete a coaster object.
+      operationId: deleteCoaster
+      parameters:
+        - name: id
+          in: path
+          description: The id of the coaster.
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Coaster successfully deleted
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '422':
+          description: Unprocessable entity
+          content: {}
+      x-codegen-request-body-name: body
+components:
+  schemas:
+    Typ:
+      required:
+        - id
+        - name
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1337
+        name:
+          type: string
+          example: Stahl
+          maxLength: 512
+    Status:
+      required:
+        - id
+        - name
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1337
+        name:
+          type: string
+          example: Offen
+          maxLength: 512
+    Location:
+      required:
+        - id
+        - name
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1337
+        name:
+          type: string
+          example: Müh hausen
+          maxLength: 512
+    Design:
+      required:
+        - id
+        - name
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1337
+        name:
+          type: string
+          example: Irgend etwas
+          maxLength: 512
+    Coaster:
+      required:
+        - id
+        - name
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1337
+        name:
+          type: string
+          example: Silverstar
+          maxLength: 512
+        opened:
+          type: string
+          example: Silverstar
+          maxLength: 512
+        location:
+          $ref: '#/components/schemas/Location'
+        typ:
+          $ref: '#/components/schemas/Typ'
+        design:
+          $ref: '#/components/schemas/Design'
+        status:
+          $ref: '#/components/schemas/Status'
+    TypList:
+        type: array
+        items:
+          $ref: '#/components/schemas/Typ'
+    StatusList:
+        type: array
+        items:
+          $ref: '#/components/schemas/Status'
+    LocationList:
+        type: array
+        items:
+          $ref: '#/components/schemas/Location'
+    DesignList:
+        type: array
+        items:
+          $ref: '#/components/schemas/Design'
+    CoasterList:
+        type: array
+        items:
+          $ref: '#/components/schemas/Coaster'
+
