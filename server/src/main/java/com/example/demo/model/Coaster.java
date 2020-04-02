@@ -1,5 +1,10 @@
-package io.swagger.model;
+package com.example.demo.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -12,9 +17,12 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * Coaster
  */
+@Entity(name = "coaster")
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-04-01T14:11:26.777Z[GMT]")
 public class Coaster {
+	@Id
+	@GeneratedValue
 	@JsonProperty("id")
 	private Integer id = null;
 
@@ -25,15 +33,19 @@ public class Coaster {
 	private String opened = null;
 
 	@JsonProperty("location")
+	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Location.class)
 	private Location location = null;
 
 	@JsonProperty("typ")
+	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Typ.class)
 	private Typ typ = null;
 
 	@JsonProperty("design")
+	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Design.class)
 	private Design design = null;
 
 	@JsonProperty("status")
+	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Status.class)
 	private Status status = null;
 
 	public Coaster id(Integer id) {

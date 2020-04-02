@@ -1,7 +1,10 @@
-package io.swagger.model;
+package com.example.demo.model;
 
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.validation.annotation.Validated;
@@ -11,18 +14,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Design
+ * Location
  */
+@Entity(name = "location")
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-04-01T14:11:26.777Z[GMT]")
-public class Design {
+public class Location {
+	@Id
+	@GeneratedValue
 	@JsonProperty("id")
 	private Integer id = null;
 
 	@JsonProperty("name")
 	private String name = null;
 
-	public Design id(Integer id) {
+	public Location id(Integer id) {
 		this.id = id;
 		return this;
 	}
@@ -43,7 +49,7 @@ public class Design {
 		this.id = id;
 	}
 
-	public Design name(String name) {
+	public Location name(String name) {
 		this.name = name;
 		return this;
 	}
@@ -53,7 +59,7 @@ public class Design {
 	 * 
 	 * @return name
 	 **/
-	@ApiModelProperty(example = "Irgend etwas", required = true, value = "")
+	@ApiModelProperty(example = "Müh hausen", required = true, value = "")
 	@NotNull
 
 	public String getName() {
@@ -72,8 +78,8 @@ public class Design {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		Design design = (Design) o;
-		return Objects.equals(this.id, design.id) && Objects.equals(this.name, design.name);
+		Location location = (Location) o;
+		return Objects.equals(this.id, location.id) && Objects.equals(this.name, location.name);
 	}
 
 	@Override
@@ -84,7 +90,7 @@ public class Design {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("class Design {\n");
+		sb.append("class Location {\n");
 
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    name: ").append(toIndentedString(name)).append("\n");

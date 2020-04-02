@@ -1,7 +1,10 @@
-package io.swagger.model;
+package com.example.demo.model;
 
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.validation.annotation.Validated;
@@ -13,20 +16,18 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * Typ
  */
+@Entity(name = "typ")
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-04-01T14:11:26.777Z[GMT]")
 public class Typ {
+	@Id
+	@GeneratedValue
 	@JsonProperty("id")
 	private Integer id = null;
 
 	@JsonProperty("name")
 	private String name = null;
-
-	public Typ id(Integer id) {
-		this.id = id;
-		return this;
-	}
-
+	
 	/**
 	 * Get id
 	 * 
