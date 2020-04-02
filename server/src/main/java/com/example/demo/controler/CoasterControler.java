@@ -17,6 +17,11 @@ import com.example.demo.repos.StatusRepository;
 import com.example.demo.repos.TypRepository;
 import com.example.demo.service.RcdbScraper;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @Controller
 public class CoasterControler {
 	@Autowired
@@ -33,11 +38,16 @@ public class CoasterControler {
 	@Autowired
 	private RcdbScraper rcdbScraper;
 
+	
+    @ApiOperation(value = "Parse rcdb.com and save to database.", notes = "", tags={ "rcdb", "coaster" })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Successfull scraped and stored to db"),
+        @ApiResponse(code = 403, message = "Forbidden") })
 	@ResponseBody
 	@GetMapping("/scrapeCoaster/{from}/{to}/toDb")
 	public List<Coaster> scrapeCoasterToDb( //
-			@PathVariable("from") Integer from, //
-			@PathVariable("to") Integer to) {
+			@ApiParam(value = "The id of the first page, to scrape.",required=true) @PathVariable("from") Integer from, //
+			@ApiParam(value = "The id of the last page, to scrape.",required=true) @PathVariable("to") Integer to) {
 
 		List<Coaster> scrape = rcdbScraper.scrape(from, to);
 
@@ -51,12 +61,15 @@ public class CoasterControler {
 		return scrape;
 	}
 	
-	
+    @ApiOperation(value = "Parse rcdb.com", notes = "", tags={ "rcdb", "coaster" })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Successfull scraped"),
+        @ApiResponse(code = 403, message = "Forbidden") })
 	@ResponseBody
 	@GetMapping("/scrapeCoaster/{from}/{to}")
 	public List<Coaster> scrapeCoasterToDisplay( //
-			@PathVariable("from") Integer from, //
-			@PathVariable("to") Integer to) {
+			@ApiParam(value = "The id of the first page, to scrape.",required=true) @PathVariable("from") Integer from, //
+			@ApiParam(value = "The id of the last page, to scrape.",required=true) @PathVariable("to") Integer to) {
 
 		List<Coaster> scrape = rcdbScraper.scrape(from, to);
 
