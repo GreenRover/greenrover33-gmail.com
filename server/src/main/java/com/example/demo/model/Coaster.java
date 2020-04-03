@@ -1,51 +1,26 @@
 package com.example.demo.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.swagger.annotations.ApiModelProperty;
-
-/**
- * Coaster
- */
-@Entity(name = "coaster")
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2020-04-01T14:11:26.777Z[GMT]")
 public class Coaster {
-	@Id
-	@GeneratedValue
-	@JsonProperty("id")
 	private Integer id = null;
-
-	@JsonProperty("name")
+	
+	@Size(min = 3, max = 15)
 	private String name = null;
+	
+	@JsonProperty("opened_date")
+	private String openedDate = null;
 
-	@JsonProperty("opened")
-	private String opened = null;
-
-	@JsonProperty("location")
-	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Location.class)
 	private Location location = null;
-
-	@JsonProperty("typ")
-	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Typ.class)
 	private Typ typ = null;
-
-	@JsonProperty("design")
-	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Design.class)
 	private Design design = null;
-
-	@JsonProperty("status")
-	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Status.class)
 	private Status status = null;
 
 	public Coaster id(Integer id) {
@@ -53,14 +28,7 @@ public class Coaster {
 		return this;
 	}
 
-	/**
-	 * Get id
-	 * 
-	 * @return id
-	 **/
-	@ApiModelProperty(example = "1337", required = true, value = "")
 	@NotNull
-
 	public Integer getId() {
 		return id;
 	}
@@ -74,14 +42,7 @@ public class Coaster {
 		return this;
 	}
 
-	/**
-	 * Get name
-	 * 
-	 * @return name
-	 **/
-	@ApiModelProperty(example = "Silverstar", required = true, value = "")
 	@NotNull
-
 	public String getName() {
 		return name;
 	}
@@ -90,37 +51,18 @@ public class Coaster {
 		this.name = name;
 	}
 
-	public Coaster opened(String opened) {
-		this.opened = opened;
-		return this;
+	public String getOpenedDate() {
+		return openedDate;
 	}
 
-	/**
-	 * Get opened
-	 * 
-	 * @return opened
-	 **/
-	@ApiModelProperty(example = "Silverstar", value = "")
-
-	public String getOpened() {
-		return opened;
-	}
-
-	public void setOpened(String opened) {
-		this.opened = opened;
+	public void setOpenedDate(String openedDate) {
+		this.openedDate = openedDate;
 	}
 
 	public Coaster location(Location location) {
 		this.location = location;
 		return this;
 	}
-
-	/**
-	 * Get location
-	 * 
-	 * @return location
-	 **/
-	@ApiModelProperty(value = "")
 
 	@Valid
 	public Location getLocation() {
@@ -136,13 +78,6 @@ public class Coaster {
 		return this;
 	}
 
-	/**
-	 * Get typ
-	 * 
-	 * @return typ
-	 **/
-	@ApiModelProperty(value = "")
-
 	@Valid
 	public Typ getTyp() {
 		return typ;
@@ -157,13 +92,6 @@ public class Coaster {
 		return this;
 	}
 
-	/**
-	 * Get design
-	 * 
-	 * @return design
-	 **/
-	@ApiModelProperty(value = "")
-
 	@Valid
 	public Design getDesign() {
 		return design;
@@ -177,13 +105,6 @@ public class Coaster {
 		this.status = status;
 		return this;
 	}
-
-	/**
-	 * Get status
-	 * 
-	 * @return status
-	 **/
-	@ApiModelProperty(value = "")
 
 	@Valid
 	public Status getStatus() {
@@ -202,7 +123,7 @@ public class Coaster {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((location == null) ? 0 : location.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((opened == null) ? 0 : opened.hashCode());
+		result = prime * result + ((openedDate == null) ? 0 : openedDate.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((typ == null) ? 0 : typ.hashCode());
 		return result;
@@ -237,10 +158,10 @@ public class Coaster {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (opened == null) {
-			if (other.opened != null)
+		if (openedDate == null) {
+			if (other.openedDate != null)
 				return false;
-		} else if (!opened.equals(other.opened))
+		} else if (!openedDate.equals(other.openedDate))
 			return false;
 		if (status == null) {
 			if (other.status != null)
@@ -262,7 +183,7 @@ public class Coaster {
 
 		sb.append("    id: ").append(toIndentedString(id)).append("\n");
 		sb.append("    name: ").append(toIndentedString(name)).append("\n");
-		sb.append("    opened: ").append(toIndentedString(opened)).append("\n");
+		sb.append("    opened: ").append(toIndentedString(openedDate)).append("\n");
 		sb.append("    location: ").append(toIndentedString(location)).append("\n");
 		sb.append("    typ: ").append(toIndentedString(typ)).append("\n");
 		sb.append("    design: ").append(toIndentedString(design)).append("\n");
