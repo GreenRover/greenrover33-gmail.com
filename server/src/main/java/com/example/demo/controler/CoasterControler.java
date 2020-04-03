@@ -1,11 +1,19 @@
 package com.example.demo.controler;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.model.Coaster;
@@ -17,10 +25,8 @@ import com.example.demo.repos.StatusRepository;
 import com.example.demo.repos.TypRepository;
 import com.example.demo.service.RcdbScraper;
 
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 
 @Controller
 public class CoasterControler {
@@ -39,15 +45,12 @@ public class CoasterControler {
 	private RcdbScraper rcdbScraper;
 
 	
-    @ApiOperation(value = "Parse rcdb.com and save to database.", notes = "", tags={ "rcdb", "coaster" })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Successfull scraped and stored to db"),
-        @ApiResponse(code = 403, message = "Forbidden") })
+	@Operation(description = "Parse rcdb.com and save to database.", tags={ "rcdb", "coaster" })
 	@ResponseBody
 	@GetMapping("/scrapeCoaster/{from}/{to}/toDb")
 	public List<Coaster> scrapeCoasterToDb( //
-			@ApiParam(value = "The id of the first page, to scrape.",required=true) @PathVariable("from") Integer from, //
-			@ApiParam(value = "The id of the last page, to scrape.",required=true) @PathVariable("to") Integer to) {
+			@Parameter(description = "The id of the first page, to scrape.",required=true) @PathVariable("from") Integer from, //
+			@Parameter(description = "The id of the last page, to scrape.",required=true) @PathVariable("to") Integer to) {
 
 		List<Coaster> scrape = rcdbScraper.scrape(from, to);
 
@@ -61,28 +64,26 @@ public class CoasterControler {
 		return scrape;
 	}
 	
-    @ApiOperation(value = "Parse rcdb.com", notes = "", tags={ "rcdb", "coaster" })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Successfull scraped"),
-        @ApiResponse(code = 403, message = "Forbidden") })
+	@Operation(description = "Parse rcdb.com", tags={ "rcdb", "coaster" })
 	@ResponseBody
 	@GetMapping("/scrapeCoaster/{from}/{to}")
 	public List<Coaster> scrapeCoasterToDisplay( //
-			@ApiParam(value = "The id of the first page, to scrape.",required=true) @PathVariable("from") Integer from, //
-			@ApiParam(value = "The id of the last page, to scrape.",required=true) @PathVariable("to") Integer to) {
+			@Parameter(description = "The id of the first page, to scrape.",required=true) @PathVariable("from") Integer from, //
+			@Parameter(description = "The id of the last page, to scrape.",required=true) @PathVariable("to") Integer to) {
 
 		List<Coaster> scrape = rcdbScraper.scrape(from, to);
 
 		return scrape;
 	}
 
+	@Operation(description = "Return JSON of a static coaster.", tags={ "coaster" })
 	@ResponseBody
 	@GetMapping("/coaster/static")
 	public Coaster coasterStatic() {
 		Coaster c = new Coaster();
 		c.setId(43);
 		c.setName("demo");
-		c.setOpened("2019-01-01");
+		c.setOpenedDate("2019-01-01");
 
 		Typ t = new Typ();
 		t.setId(1);
@@ -90,5 +91,24 @@ public class CoasterControler {
 		c.setTyp(t);
 		return c;
 	}
+	
+	@Operation(description = "Receive a coaster, change name and output if if there are no errors.", tags={ "coaster" })
+	@SuppressWarnings("rawtypes")
+	@PostMapping("/coaster/test")
+	public ResponseEntity coasterTest(@Valid @RequestBody Coaster c, final BindingResult br) {
 
+		if (br.hasErrors()) {
+			final String errors = br.getFieldErrors().stream() //
+					.map(x -> x.getField() + " = " + x.getDefaultMessage()) //
+					.collect(Collectors.joining("\n"));
+			
+			System.out.println(errors);
+
+			return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+		}
+		
+		c.setName("Hallo Home");
+		
+		return new ResponseEntity<>(c, HttpStatus.NOT_FOUND);
+	}
 }

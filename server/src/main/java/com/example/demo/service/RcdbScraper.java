@@ -100,7 +100,7 @@ public class RcdbScraper {
 			final Coaster c = new Coaster();
 			c.setId(Integer.parseInt(matcher.group(1)));
 			c.setName(matcher.group(2));
-			c.setOpened(matcher.group(17));
+			c.setOpenedDate(matcher.group(17));
 			c.setLocation(getLocation(Integer.parseInt(matcher.group(3)), matcher.group(4)));
 			c.setTyp(getTyp(Integer.parseInt(matcher.group(5)), matcher.group(6)));
 			c.setDesign(getDesign(Integer.parseInt(matcher.group(7)), matcher.group(8)));
