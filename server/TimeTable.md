@@ -7,25 +7,23 @@ https://start.spring.io/
 - jpa
 - postgre
 - lombok
-- rest
 
-Additional poms:
+# 2020-04-07
 
-```
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>2.9.2</version>
-		</dependency>
-```
+## Rest API
+
+CoasterControler.coasterStatic
+CoasterControler.coasterTest
+
 
 ## Schema
 
 Dont enter code twice.
 
-https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api
+/v3/api-docs/
+/swagger-ui.html
 
-## Rest API
+https://github.com/springdoc/springdoc-openapi
 
 ## DB Access
 

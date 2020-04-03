@@ -3,6 +3,7 @@ package com.example.demo.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -21,7 +22,7 @@ import lombok.Data;
 @Validated
 @Data
 @Schema(description = "A roaler coaster")
-public class Coaster {
+public class Coaster implements HavingPK {
 	@Id
 	@GeneratedValue
 	@NotNull
@@ -39,18 +40,18 @@ public class Coaster {
 	private String openedDate = null;
 
 	@Valid
-	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Location.class)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch =  FetchType.EAGER)
 	private Location location = null;
 
 	@Valid
-	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Typ.class)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch =  FetchType.EAGER)
 	private Typ typ = null;
 
 	@Valid
-	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Design.class)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch =  FetchType.EAGER)
 	private Design design = null;
 
 	@Valid
-	@ManyToOne(cascade = CascadeType.ALL, targetEntity = Status.class)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch =  FetchType.EAGER)
 	private Status status = null;
 }
