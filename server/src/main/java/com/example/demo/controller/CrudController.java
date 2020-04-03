@@ -1,4 +1,4 @@
-package com.example.demo.controler;
+package com.example.demo.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.example.demo.api.GenericError;
 import com.example.demo.model.HavingPK;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,7 +39,7 @@ import lombok.AllArgsConstructor;
 @Controller
 @SuppressWarnings("rawtypes")
 @AllArgsConstructor
-public abstract class CrudControler<T extends HavingPK> {
+public abstract class CrudController<T extends HavingPK> {
 	private final JpaRepository<T, Integer> repository;
 
 	@GetMapping(path = "")
@@ -73,7 +74,7 @@ public abstract class CrudControler<T extends HavingPK> {
 	@ApiResponses(value = { //
 			@ApiResponse(responseCode = "201", description = "object was succesfull created"), //
 			@ApiResponse(responseCode = "400", description = "the given input is invalid", content = @Content(schema = @Schema(implementation = String.class))), //
-			@ApiResponse(responseCode = "500", description = "something unexpected went verry wrong.", content = @Content(schema = @Schema(implementation = Exception.class))) //
+			@ApiResponse(responseCode = "500", description = "something unexpected went verry wrong.", content = @Content(schema = @Schema(implementation = GenericError.class))) //
 	})
 	public ResponseEntity create( //
 			@Valid @RequestBody T newObject) {
@@ -91,7 +92,7 @@ public abstract class CrudControler<T extends HavingPK> {
 			@ApiResponse(responseCode = "200", description = "object was succesfull updated"), //
 			@ApiResponse(responseCode = "400", description = "the given input is invalid", content = @Content(schema = @Schema(implementation = String.class))), //
 			@ApiResponse(responseCode = "404", description = "object dosent exist"), //
-			@ApiResponse(responseCode = "500", description = "something unexpected went verry wrong.", content = @Content(schema = @Schema(implementation = Exception.class))) //
+			@ApiResponse(responseCode = "500", description = "something unexpected went verry wrong.", content = @Content(schema = @Schema(implementation = GenericError.class))) //
 	})
 	public ResponseEntity update( //
 			@Parameter(description = "The id of the object to update.", required = true) @PathVariable("id") int id, //
@@ -113,7 +114,7 @@ public abstract class CrudControler<T extends HavingPK> {
 	@ApiResponses(value = { //
 			@ApiResponse(responseCode = "200", description = "object was succesfull deleted"), //
 			@ApiResponse(responseCode = "404", description = "object dosent exist"), //
-			@ApiResponse(responseCode = "500", description = "something unexpected went verry wrong.", content = @Content(schema = @Schema(implementation = Exception.class))) //
+			@ApiResponse(responseCode = "500", description = "something unexpected went verry wrong.", content = @Content(schema = @Schema(implementation = GenericError.class))) //
 	})
 	public ResponseEntity delete( //
 			@Parameter(description = "The id of the object to delete.", required = true) @PathVariable("id") int id) {

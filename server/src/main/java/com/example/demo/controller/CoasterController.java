@@ -1,4 +1,4 @@
-package com.example.demo.controler;
+package com.example.demo.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,7 +33,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "coaster")
 @Controller
 @RequestMapping("/coaster")
-public class CoasterControler extends CrudControler<Coaster> {
+public class CoasterController extends CrudController<Coaster> {
 	
 	private final CoasterRepository coasterRepository;
 	
@@ -50,7 +50,7 @@ public class CoasterControler extends CrudControler<Coaster> {
 	private RcdbScraper rcdbScraper;
 
 	
-	public CoasterControler(CoasterRepository coasterRepository) {
+	public CoasterController(CoasterRepository coasterRepository) {
 		super(coasterRepository);
 		this.coasterRepository = coasterRepository;
 	}

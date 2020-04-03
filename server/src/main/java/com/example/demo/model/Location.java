@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 @Entity(name = "location")
 @Validated
-public class Location {
+public class Location implements HavingPK {
 	@Id
 	@GeneratedValue
 	@NotNull
