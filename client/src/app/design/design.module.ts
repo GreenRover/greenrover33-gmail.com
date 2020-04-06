@@ -1,5 +1,5 @@
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
+import { MaterialModule } from './../material.module';
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -20,8 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
 
-    MatMenuModule,
-    MatIconModule
+    MaterialModule
   ]
 })
 export class DesignModule { }

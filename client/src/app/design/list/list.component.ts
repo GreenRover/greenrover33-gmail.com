@@ -11,6 +11,8 @@ import { Design } from './../../api/model/design';
 })
 export class ListComponent implements OnInit {
 
+  displayedColumns: string[] = ['name', 'actions'];
+
   page: Page<Design> = new EmptyPage();
 
   constructor(

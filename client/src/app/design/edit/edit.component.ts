@@ -18,6 +18,7 @@ export class EditComponent implements OnInit {
   ) { }
 
   form: FormGroup;
+  editing: string;
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -26,8 +27,11 @@ export class EditComponent implements OnInit {
     });
 
     this.route.params.subscribe(params => {
+      this.editing = null;
+
       if (params[`id`]) {
         this.designService.get(params[`id`]).subscribe(res => {
+          this.editing = res.name;
           this.form.setValue(res);
         });
       }
