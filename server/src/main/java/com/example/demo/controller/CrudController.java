@@ -52,7 +52,7 @@ public abstract class CrudController<T extends HavingPK> {
 	@GetMapping(path = "paged")
 	@ResponseBody
 	@Operation(description = "Receive a list of objects, paged")
-	public Page<T> list( //
+	public Page<T> paged( //
 			@Parameter(description = "The page to show.", required = true) @RequestParam(value = "page", defaultValue = "1") int page, //
 			@Parameter(description = "The items per page.", required = true) @RequestParam(value = "items", defaultValue = "25") int itemsPerPage //
 	) {
