@@ -3,7 +3,7 @@ export * from './design';
 export * from './genericError';
 export * from './havingPK';
 export * from './location';
-export * from './pageHavingPK';
+export * from './page';
 export * from './pageable';
 export * from './sort';
 export * from './status';

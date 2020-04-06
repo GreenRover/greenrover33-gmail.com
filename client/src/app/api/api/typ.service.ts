@@ -19,7 +19,7 @@ import { Observable }                                        from 'rxjs';
 
 import { GenericError } from '../model/genericError';
 import { HavingPK } from '../model/havingPK';
-import { PageHavingPK } from '../model/pageHavingPK';
+import { Page } from '../model/page';
 import { Typ } from '../model/typ';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -231,9 +231,9 @@ export class TypService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public paged(page: number, items: number, observe?: 'body', reportProgress?: boolean): Observable<PageHavingPK>;
-    public paged(page: number, items: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageHavingPK>>;
-    public paged(page: number, items: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageHavingPK>>;
+    public paged(page: number, items: number, observe?: 'body', reportProgress?: boolean): Observable<Page<Typ>>;
+    public paged(page: number, items: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Page<Typ>>>;
+    public paged(page: number, items: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Page<Typ>>>;
     public paged(page: number, items: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (page === null || page === undefined) {
@@ -267,7 +267,7 @@ export class TypService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<PageHavingPK>('get',`${this.basePath}/typ/paged`,
+        return this.httpClient.request<Page<Typ>>('get',`${this.basePath}/typ/paged`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,

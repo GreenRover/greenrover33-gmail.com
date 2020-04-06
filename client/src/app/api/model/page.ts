@@ -9,20 +9,24 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { HavingPK } from './havingPK';
 import { Pageable } from './pageable';
 import { Sort } from './sort';
 
-export interface PageHavingPK { 
+export interface Page<T> {
     totalElements?: number;
     totalPages?: number;
     number?: number;
     size?: number;
-    content?: Array<HavingPK>;
+    content?: Array<T>;
     sort?: Sort;
     numberOfElements?: number;
     first?: boolean;
     pageable?: Pageable;
     last?: boolean;
     empty?: boolean;
+}
+
+export class EmptyPage {
+  totalPages: 1;
+  content: [];
 }

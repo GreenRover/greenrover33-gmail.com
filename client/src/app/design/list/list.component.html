@@ -1,1 +1,23 @@
-<p>list works!</p>
+<div>
+    <h1>Designs</h1>
+    <button type="button" routerLink="/design/create">Create new design</button>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let design of page.content">
+                <td>{{design.id}}</td>
+                <td>{{design.name}}</td>
+                <td>
+                    <button type="button" [routerLink]="['/design/update/', design.id]">Update</button>
+                    <button type="button" (click)="delete(design.id)">Remove</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -20,7 +20,7 @@ import { Observable }                                        from 'rxjs';
 import { Coaster } from '../model/coaster';
 import { GenericError } from '../model/genericError';
 import { HavingPK } from '../model/havingPK';
-import { PageHavingPK } from '../model/pageHavingPK';
+import { Page } from '../model/page';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -252,9 +252,9 @@ export class CoasterService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public paged(page: number, items: number, observe?: 'body', reportProgress?: boolean): Observable<PageHavingPK>;
-    public paged(page: number, items: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageHavingPK>>;
-    public paged(page: number, items: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageHavingPK>>;
+    public paged(page: number, items: number, observe?: 'body', reportProgress?: boolean): Observable<Page<Coaster>>;
+    public paged(page: number, items: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Page<Coaster>>>;
+    public paged(page: number, items: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Page<Coaster>>>;
     public paged(page: number, items: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (page === null || page === undefined) {
@@ -288,7 +288,7 @@ export class CoasterService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<PageHavingPK>('get',`${this.basePath}/coaster/paged`,
+        return this.httpClient.request<Page<Coaster>>('get',`${this.basePath}/coaster/paged`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,

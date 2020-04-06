@@ -20,7 +20,7 @@ import { Observable }                                        from 'rxjs';
 import { Design } from '../model/design';
 import { GenericError } from '../model/genericError';
 import { HavingPK } from '../model/havingPK';
-import { PageHavingPK } from '../model/pageHavingPK';
+import { Page } from '../model/page';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -231,9 +231,9 @@ export class DesignService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public paged(page: number, items: number, observe?: 'body', reportProgress?: boolean): Observable<PageHavingPK>;
-    public paged(page: number, items: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageHavingPK>>;
-    public paged(page: number, items: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageHavingPK>>;
+    public paged(page: number, items: number, observe?: 'body', reportProgress?: boolean): Observable<Page<Design>>;
+    public paged(page: number, items: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Page<Design>>>;
+    public paged(page: number, items: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Page<Design>>>;
     public paged(page: number, items: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (page === null || page === undefined) {
@@ -267,7 +267,7 @@ export class DesignService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<PageHavingPK>('get',`${this.basePath}/design/paged`,
+        return this.httpClient.request<Page<Design>>('get',`${this.basePath}/design/paged`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,

@@ -1,1 +1,16 @@
-<p>edit works!</p>
+ <div>
+    <h1>Create Product</h1>
+    <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
+        <input type="text" formControlName="id" class="form-control" hidden="hidden">
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" formControlName="name" class="form-control" maxlength="20">
+        </div>
+        <div *ngIf="form.controls['name'].invalid && (form.controls['name'].dirty || form.controls['name'].touched)" class="alert alert-danger">
+          <div *ngIf="form.controls['name'].errors.required">
+            Name is required.
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="form.pristine || form.invalid">Submit</button>
+    </form>
+</div>
