@@ -1,2 +1,19 @@
 server:
   port: 8039
+  
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  datasource:
+    initialization-mode: never
+    platform: postgres
+    url: "jdbc:postgresql://db-postgresql-fra1-39545-do-user-2658320-0.a.db.ondigitalocean.com:25060/db2"
+    username: user
+    password: ttay3lh08nfddlx0
+    hikari:
+      maximum-pool-size: 5
+      
+
+  
