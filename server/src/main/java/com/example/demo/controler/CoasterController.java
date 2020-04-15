@@ -1,5 +1,6 @@
 package com.example.demo.controler;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -14,10 +15,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Coaster;
 import com.example.demo.model.Typ;
+import com.example.demo.repos.CoasterRepository;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @RestController
 public class CoasterController {
 	
+	private final CoasterRepository coasterRepository;
+
 	@GetMapping("static")
 	public Coaster coasterStatic() {
 		Coaster c = new Coaster();
@@ -49,5 +56,10 @@ public class CoasterController {
 		c.setName("Hallo Home");
 		
 		return new ResponseEntity<>(c, HttpStatus.OK);
+	}
+	
+	@GetMapping("WoodCoaster")
+	public List<Coaster> findWoodCoaster() {
+		return coasterRepository.findWoodCoaster();
 	}
 }
