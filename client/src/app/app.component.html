@@ -1,7 +1,13 @@
-Hello home
+<mat-menu #appMenu="matMenu">
+  <button mat-menu-item routerLink="coaster/list" routerLinkActive="active">Coaster</button>
+  <button mat-menu-item routerLink="design" routerLinkActive="active">Design</button>
+  <button mat-menu-item routerLink="location" routerLinkActive="active">Location</button>
+  <button mat-menu-item routerLink="status" routerLinkActive="active">Status</button>
+  <button mat-menu-item routerLink="typ" routerLinkActive="active">Typ</button>
+</mat-menu>
 
-<br>
+<button mat-icon-button [matMenuTriggerFor]="appMenu">
+  <mat-icon>menu</mat-icon>
+</button>
+
 <router-outlet></router-outlet>
-<br>
-
-sonst irgend was

@@ -1,3 +1,6 @@
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MaterialModule } from './material.module';
 import { TypModule } from './typ/typ.module';
 import { StatusModule } from './status/status.module';
 import { LocationModule } from './location/location.module';
@@ -24,7 +27,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DesignModule,
     LocationModule,
     StatusModule,
-    TypModule
+    TypModule,
+
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
