@@ -1,3 +1,9 @@
+import { TypModule } from './typ/typ.module';
+import { StatusModule } from './status/status.module';
+import { LocationModule } from './location/location.module';
+import { DesignModule } from './design/design.module';
+import { CoasterModule } from './coaster/coaster.module';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -12,7 +18,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+
+    CoasterModule,
+    DesignModule,
+    LocationModule,
+    StatusModule,
+    TypModule
   ],
   providers: [],
   bootstrap: [AppComponent]

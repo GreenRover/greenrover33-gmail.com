@@ -1,8 +1,17 @@
+import { EditComponent } from './edit/edit.component';
+import { DetailsComponent } from './details/details.component';
+import { ListComponent } from './list/list.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: 'coaster', redirectTo: 'coaster/list', pathMatch: 'full' },
+  { path: 'coaster/list', component: ListComponent },
+  { path: 'coaster/details/:id', component: DetailsComponent },
+  { path: 'coaster/edit', component: EditComponent },
+  { path: 'coaster/edit/:id', component: EditComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
