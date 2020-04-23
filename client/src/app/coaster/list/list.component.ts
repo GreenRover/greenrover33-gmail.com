@@ -1,3 +1,4 @@
+import { CoasterService } from './../../api/api/coaster.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private coasterApi: CoasterService
+  ) { }
 
   ngOnInit(): void {
+    this.coasterApi.paged(1, 25).subscribe(page => {
+      console.log(page);
+    });
   }
 
 }

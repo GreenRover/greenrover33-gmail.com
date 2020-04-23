@@ -15,5 +15,9 @@ spring:
     hikari:
       maximum-pool-size: 5
       
+      
+cors:
+ allowed-origins:
+  - http://localhost:4200
 
   
