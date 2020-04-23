@@ -1,0 +1,11 @@
+export * from './coaster.service';
+import { CoasterService } from './coaster.service';
+export * from './design.service';
+import { DesignService } from './design.service';
+export * from './location.service';
+import { LocationService } from './location.service';
+export * from './status.service';
+import { StatusService } from './status.service';
+export * from './typ.service';
+import { TypService } from './typ.service';
+export const APIS = [CoasterService, DesignService, LocationService, StatusService, TypService];
