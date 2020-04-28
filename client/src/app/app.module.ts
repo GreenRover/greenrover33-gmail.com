@@ -1,3 +1,4 @@
+import { MaterialModule } from './material.module';
 import { TypModule } from './typ/typ.module';
 import { StatusModule } from './status/status.module';
 import { LocationModule } from './location/location.module';
@@ -11,9 +12,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -35,8 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
     StatusModule,
     TypModule,
 
-    MatMenuModule,
-    MatIconModule
+    MaterialModule
   ],
   providers: [{
     provide: BASE_PATH,
