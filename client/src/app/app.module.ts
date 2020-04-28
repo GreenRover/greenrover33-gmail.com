@@ -1,3 +1,4 @@
+import { LtaModule } from './lta/lta.module';
 import { MaterialModule } from './material.module';
 import { TypModule } from './typ/typ.module';
 import { StatusModule } from './status/status.module';
@@ -32,6 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
     LocationModule,
     StatusModule,
     TypModule,
+
+    LtaModule,
 
     MaterialModule
   ],
