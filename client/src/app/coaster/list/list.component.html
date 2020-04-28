@@ -1,24 +1,26 @@
 <h2>Coaster list</h2>
 
-<table>
- <thead>
+<table class="table table-light table-striped">
+ <thead class="thead-dark">
   <tr>
-   <th>Name</th>
-   <th>Location</th>
-   <th>Typ</th>
-   <th>Design</th>
-   <th>Status</th>
-   <th>Opened</th>
+   <th scope="col">Name</th>
+   <th scope="col">Location</th>
+   <th scope="col">Typ</th>
+   <th scope="col">Design</th>
+   <th scope="col">Status</th>
+   <th scope="col">Opened</th>
   </tr>
  </thead>
  <tbody>
-  <tr>
-   <td></td>
-   <td></td>
-   <td></td>
-   <td></td>
-   <td></td>
-   <td></td>
+  <tr *ngFor="let coaster of page.content">
+   <td>{{coaster.name}}</td>
+   <td><span *ngIf="coaster.location">
+    {{coaster.location.name}}
+   </span></td>
+   <td>{{coaster.typ?.name || "-"}}</td>
+   <td>{{coaster.design?.name || "-"}}</td>
+   <td>{{coaster.status?.name || "-"}}</td>
+   <td>{{coaster.openedDate}}</td>
   </tr>
  </tbody>
 </table>
