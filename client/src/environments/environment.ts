@@ -4,7 +4,13 @@
 
 export const environment = {
   production: false,
-  API_BASE_PATH: 'http://127.0.0.1:8038'
+  API_BASE_PATH: 'http://127.0.0.1:8038',
+  sbb_dmz_broker: {
+    url: '193.203.121.50:15443,193.203.121.52:15443',
+    vpnName: 'default',
+    userName: 'default',
+    password: 'default',
+  }
 };
 
 /*

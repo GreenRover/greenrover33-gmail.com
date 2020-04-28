@@ -8,14 +8,13 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Coaster;
 import com.example.demo.model.Typ;
@@ -31,7 +30,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(name = "coaster")
-@Controller
+@RestController
 @RequestMapping("/coaster")
 public class CoasterController extends CrudController<Coaster> {
 	
@@ -56,7 +55,6 @@ public class CoasterController extends CrudController<Coaster> {
 	}
 	
 	@Operation(description = "Parse rcdb.com and save to database.", tags={ "rcdb" })
-	@ResponseBody
 	@GetMapping("/scrape/{from}/{to}/toDb")
 	public List<Coaster> scrapeCoasterToDb( //
 			@Parameter(description = "The id of the first page, to scrape.",required=true) @PathVariable("from") Integer from, //
@@ -75,7 +73,6 @@ public class CoasterController extends CrudController<Coaster> {
 	}
 	
 	@Operation(description = "Parse rcdb.com", tags={ "rcdb" })
-	@ResponseBody
 	@GetMapping("/scrape/{from}/{to}")
 	public List<Coaster> scrapeCoasterToDisplay( //
 			@Parameter(description = "The id of the first page, to scrape.",required=true) @PathVariable("from") Integer from, //
@@ -87,7 +84,6 @@ public class CoasterController extends CrudController<Coaster> {
 	}
 
 	@Operation(description = "Return JSON of a static coaster.")
-	@ResponseBody
 	@GetMapping("static")
 	public Coaster coasterStatic() {
 		Coaster c = new Coaster();
@@ -121,4 +117,10 @@ public class CoasterController extends CrudController<Coaster> {
 		
 		return new ResponseEntity<>(c, HttpStatus.NOT_FOUND);
 	}
+	
+	@GetMapping("WoodCoaster")
+	public List<Coaster> findWoodCoaster() {
+		return coasterRepository.findWoodCoaster();
+	}
+	
 }

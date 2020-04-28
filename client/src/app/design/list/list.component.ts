@@ -26,8 +26,8 @@ export class ListComponent implements OnInit {
     });
   }
 
-  delete(id): void {
-    this.designService.delete(id).subscribe(page => {
+  delete(id: number): void {
+    this.designService.delete(id).subscribe(status => {
       console.log(id + ' was deleted');
       this.ngOnInit();
     });

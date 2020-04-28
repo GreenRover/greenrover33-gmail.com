@@ -8,3 +8,13 @@ export * from './pageable';
 export * from './sort';
 export * from './status';
 export * from './typ';
+
+export * from './codePunkt';
+export * from './elzMessage';
+export * from './tzdeDiskri';
+export * from './tzdeGleisfeld';
+export * from './tzdeMessage';
+export * from './tzdeTime';
+export * from './versionedTmsMessage';
+export * from './znvMessage';
+export * from './zugIdentifikation';

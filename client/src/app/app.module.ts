@@ -4,7 +4,7 @@ import { LocationModule } from './location/location.module';
 import { DesignModule } from './design/design.module';
 import { CoasterModule } from './coaster/coaster.module';
 import { ApiModule } from './api/api.module';
-import { BASE_PATH } from './api/variables';
+import { BASE_PATH, SBB_DMZ_BROKER } from './api/variables';
 import { environment } from '../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -41,6 +41,9 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [{
     provide: BASE_PATH,
     useValue: environment.API_BASE_PATH
+  }, {
+    provide: SBB_DMZ_BROKER,
+    useValue: environment.sbb_dmz_broker
   }],
   bootstrap: [AppComponent]
 })

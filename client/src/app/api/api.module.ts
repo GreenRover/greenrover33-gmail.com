@@ -18,7 +18,8 @@ import { TypService } from './api/typ.service';
     DesignService,
     LocationService,
     StatusService,
-    TypService ]
+    TypService,
+  ]
 })
 export class ApiModule {
     public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders {
