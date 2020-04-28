@@ -2,6 +2,7 @@ import { Page } from './../../api/model/page';
 import { Coaster } from './../../api/model/coaster';
 import { CoasterService } from './../../api/api/coaster.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -16,11 +17,19 @@ export class ListComponent implements OnInit {
   };
 
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private coasterApi: CoasterService
   ) { }
 
   ngOnInit(): void {
-    this.loadPage(1);
+    this.route.params.subscribe(params => {
+      if (params.page) {
+        this.loadPage(params.page);
+      } else {
+        console.log('Missing parameter page');
+      }
+    });
   }
 
   private loadPage(p: number) {
@@ -31,7 +40,7 @@ export class ListComponent implements OnInit {
   }
 
   public goToPage(page: number) {
-    this.loadPage(page);
+    this.router.navigate(['coaster/list/', page]);
   }
 
 }
