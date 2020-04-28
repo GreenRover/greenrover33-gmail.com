@@ -1,3 +1,6 @@
+import { Coaster } from './../../api/model/coaster';
+import { Page, EmptyPage } from './../../api/model/page';
+import { CoasterService } from './../../api/api/coaster.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListComponent implements OnInit {
 
-  constructor() { }
+  page: Page<Coaster> = new EmptyPage();
+
+  constructor(
+    public coasterService: CoasterService
+  ) { }
 
   ngOnInit(): void {
+    this.coasterService.paged(0, 25, 'body').subscribe(page => {
+      console.log(page);
+      this.page = page;
+    });
   }
 
+  delete(id: number): void {
+    this.coasterService.delete(id).subscribe(status => {
+      console.log(id + ' was deleted');
+      this.ngOnInit();
+    });
+  }
 }
