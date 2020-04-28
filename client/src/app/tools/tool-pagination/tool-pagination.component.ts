@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-tool-pagination',
@@ -13,6 +13,9 @@ export class ToolPaginationComponent implements OnChanges {
   @Input()
   public currentPage = 1;
 
+  @Output()
+  public pageChange: EventEmitter<number> = new EventEmitter();
+
   public pages: number[] = [];
 
   constructor() { }
@@ -23,15 +26,19 @@ export class ToolPaginationComponent implements OnChanges {
       minPage = 1;
     }
 
-    let maxPage = this.currentPage + 5;
+    let maxPage = minPage + 11;
     if (maxPage > this.totalPages) {
       maxPage = this.totalPages;
     }
 
     this.pages.length = 0;
-    for (let i = minPage; i <= maxPage; i++) {
+    for (let i = minPage; i < maxPage; i++) {
       this.pages.push(i);
     }
+  }
+
+  public choosePage(page: number) {
+    this.pageChange.emit(page);
   }
 
 }

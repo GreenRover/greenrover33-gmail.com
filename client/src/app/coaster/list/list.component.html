@@ -25,4 +25,4 @@
  </tbody>
 </table>
 
-<app-tool-pagination [totalPages]="page.totalPages" [currentPage]="page.number"></app-tool-pagination>
+<app-tool-pagination [totalPages]="page.totalPages" [currentPage]="page.number + 1" (pageChange)="goToPage($event)"></app-tool-pagination>

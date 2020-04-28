@@ -1,5 +1,5 @@
 <ul class="pagination">
-  <li class="page-item" [ngClass]="{'active': currentPage === p}" *ngFor="let p of pages">
+  <li class="page-item" [ngClass]="{'active': currentPage === p}" *ngFor="let p of pages" (click)="choosePage(p)">
     <span class="page-link">{{p}}</span>
   </li>
 </ul>

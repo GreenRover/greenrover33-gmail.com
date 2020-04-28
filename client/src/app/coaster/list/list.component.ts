@@ -20,10 +20,18 @@ export class ListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.coasterApi.paged(1, 25).subscribe(page => {
+    this.loadPage(1);
+  }
+
+  private loadPage(p: number) {
+    this.coasterApi.paged((p - 1), 25).subscribe(page => {
       this.page = page;
       console.log(page);
     });
+  }
+
+  public goToPage(page: number) {
+    this.loadPage(page);
   }
 
 }
