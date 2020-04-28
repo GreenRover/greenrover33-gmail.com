@@ -28,34 +28,32 @@ export class ZugPosComponent implements OnInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
 
-    window.setTimeout(() => {
-      this.ltaService.subscribeZnv() //
-        .pipe(
-          filter(znt => znt.typ === 'ORT'),
-          filter(znt => !!znt.bisZugIdentifikation.zugnummer),
-          bufferTime(1000) // dont overload the browser, only process it once a second.
-        )
-        .subscribe(znts => {
-          console.log(znts);
-          for (const znt of znts) {
-            const zn = znt.bisZugIdentifikation.zugnummer;
+    this.ltaService.subscribeZnv() //
+      .pipe(
+        filter(znt => znt.typ === 'ORT'),
+        filter(znt => !!znt.bisZugIdentifikation.zugnummer),
+        bufferTime(1000) // dont overload the browser, only process it once a second.
+      )
+      .subscribe(znts => {
+        console.log(znts);
+        for (const znt of znts) {
+          const zn = znt.bisZugIdentifikation.zugnummer;
 
-            this.zugPos.set(zn, {
-              station: znt.bisStation,
-              gleis: znt.bisGleisName
-            });
-          }
-
-          // Flatt the data.
-          this.dataSource.data = [...this.zugPos.entries()].map(e => {
-            return {
-              zug: e[0],
-              station: e[1].station,
-              gleis: e[1].gleis,
-            };
+          this.zugPos.set(zn, {
+            station: znt.bisStation,
+            gleis: znt.bisGleisName
           });
+        }
+
+        // Flatt the data.
+        this.dataSource.data = [...this.zugPos.entries()].map(e => {
+          return {
+            zug: e[0],
+            station: e[1].station,
+            gleis: e[1].gleis,
+          };
         });
-    }, 500);
+      });
   }
 
   applyFilter(event: Event) {

@@ -15,6 +15,7 @@ export class SolaceSession {
   private session;
   private subscriptions = new Map<string, (data: string) => void>();
   private wildcardSubscriptions = new Map<string, (data: string) => void>();
+  private isConnected: Promise<any>;
 
   constructor(@Inject(SBB_DMZ_BROKER) sessionProperties: SessionProperties) {
     solace.SessionProperties.connectTimeoutInMsecs = 30 * 1000;
@@ -29,16 +30,22 @@ export class SolaceSession {
 
       this.session = solace.SolclientFactory.createSession(sessionProperties);
 
-      this.session.on(solace.SessionEventCode.UP_NOTICE, (sessionEvent) => {
-        console.log('=== Successfully connected and ready to subscribe. ===');
-      });
       this.session.on(solace.SessionEventCode.CONNECT_FAILED_ERROR, (sessionEvent) => {
         console.log('Connection failed to the message router: ' + sessionEvent.infoStr +
           ' - check correct parameter values and connectivity!');
       });
 
-      this.session.connect();
-
+      this.isConnected = new Promise((resolve, reject) => {
+        try {
+          this.session.on(solace.SessionEventCode.UP_NOTICE, (sessionEvent) => {
+            resolve();
+            console.log('=== Successfully connected and ready to subscribe. ===');
+          });
+          this.session.connect();
+        } catch (e) {
+          reject(e);
+        }
+      });
 
       this.session.on(solace.SessionEventCode.MESSAGE, message => {
         const bin: string = message.getBinaryAttachment();
@@ -64,7 +71,7 @@ export class SolaceSession {
   }
 
   public subcribeTopicCb(topic: string, callback: (data: string) => void, errCallback?: (err: any) => void) {
-    if (topic.indexOf('+') !== -1) {
+    if (topic.indexOf('*') !== -1) {
       throw new Error('Invalid topic, found a *, only full match and begins with (ending with >) are permitted');
     }
 
@@ -75,6 +82,17 @@ export class SolaceSession {
       this.subscriptions.set(topic, callback);
     }
 
+    if (this.isConnected == null) {
+      this.subscribeTopic(topic, errCallback);
+    } else {
+      this.isConnected.then(() => {
+        this.subscribeTopic(topic, errCallback);
+        this.isConnected = null;
+      });
+    }
+  }
+
+  private subscribeTopic(topic, errCallback) {
     try {
       this.session.subscribe(
         solace.SolclientFactory.createTopicDestination(topic),
