@@ -1,3 +1,4 @@
+import { ToolsModule } from './../tools/tools.module';
 import { MaterialModule } from './../material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -9,12 +10,17 @@ import { EditComponent } from './edit/edit.component';
 
 
 @NgModule({
-  declarations: [ListComponent, DetailsComponent, EditComponent],
+  declarations: [
+    ListComponent,
+    DetailsComponent,
+    EditComponent
+  ],
   imports: [
     CommonModule,
     CoasterRoutingModule,
 
-    MaterialModule
+    MaterialModule,
+    ToolsModule
   ]
 })
 export class CoasterModule { }

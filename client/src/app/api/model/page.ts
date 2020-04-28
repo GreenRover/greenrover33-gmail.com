@@ -28,5 +28,6 @@ export interface Page<T> {
 
 export class EmptyPage {
   totalPages: 1;
+  totalElements: 1;
   content: [];
 }

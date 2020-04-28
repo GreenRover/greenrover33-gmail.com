@@ -35,4 +35,6 @@
       </tr>
     </tbody>
   </table>
+
+  <app-tool-pagination [totalRecords]="page.totalElements" [recordsPerPage]="itemsPerPage" (pageChange)="displayPage($event)"></app-tool-pagination>
 </div>

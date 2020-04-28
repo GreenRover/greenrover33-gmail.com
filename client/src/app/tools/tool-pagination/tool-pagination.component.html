@@ -1,0 +1,13 @@
+<nav aria-label="page navigation">
+  <ul class="pagination">
+    <li class="page-item" (click)="choosePage(activePage - 1)">
+      <span class="page-link">Previous</span>
+    </li>
+    <li class="page-item" [ngClass]="{'active': activePage === item}" *ngFor="let item of pages" (click)="choosePage(item)">
+      <span class="page-link">{{item}}</span>
+    </li>
+    <li class="page-item" (click)="choosePage(activePage + 1)">
+      <span class="page-link">Next</span>
+    </li>
+  </ul>
+</nav>

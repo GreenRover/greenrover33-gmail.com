@@ -9,15 +9,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-
-  page: Page<Coaster> = new EmptyPage();
+  public itemsPerPage: number;
+  public page: Page<Coaster> = new EmptyPage();
 
   constructor(
     public coasterService: CoasterService
-  ) { }
+  ) {
+    this.itemsPerPage = 25;
+  }
 
   ngOnInit(): void {
-    this.coasterService.paged(0, 25, 'body').subscribe(page => {
+    this.displayPage(1);
+  }
+
+  displayPage(pageNr: number) {
+    this.coasterService.paged(pageNr - 1, this.itemsPerPage, 'body').subscribe(page => {
       console.log(page);
       this.page = page;
     });
