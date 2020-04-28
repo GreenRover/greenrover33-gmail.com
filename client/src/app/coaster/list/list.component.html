@@ -4,31 +4,35 @@
 </mat-toolbar>
 
 <div class="container" novalidate>
-  <table>
-    <tr>
-      <th>Name</th>
-      <th>Location</th>
-      <th>Typ</th>
-      <th>Design</th>
-      <th>Status</th>
-      <th>Opened</th>
-    </tr>
-    <tr *ngFor="let item of page.content; index as i">
-      <td>{{item.name}}</td>
+  <table class="table table-light table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Location</th>
+        <th scope="col">Typ</th>
+        <th scope="col">Design</th>
+        <th scope="col">Status</th>
+        <th scope="col">Opened</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of page.content; index as i">
+        <td>{{item.name}}</td>
 
-      <td *ngIf="item.location"><a [routerLink]="['/location/update/', item.location.id]">{{item.location.name}}</a></td>
-      <td *ngIf="!item.location"> - </td>
+        <td *ngIf="item.location"><a [routerLink]="['/location/update/', item.location.id]">{{item.location.name}}</a></td>
+        <td *ngIf="!item.location"> - </td>
 
-      <td *ngIf="item.typ"><a      [routerLink]="['/typ/update/', item.typ.id]">{{item.typ.name}}</a></td>
-      <td *ngIf="!item.typ"> - </td>
+        <td *ngIf="item.typ"><a      [routerLink]="['/typ/update/', item.typ.id]">{{item.typ.name}}</a></td>
+        <td *ngIf="!item.typ"> - </td>
 
-      <td *ngIf="item.design"><a   [routerLink]="['/design/update/', item.design.id]">{{item.design.name}}</a></td>
-      <td *ngIf="!item.design"> - </td>
+        <td *ngIf="item.design"><a   [routerLink]="['/design/update/', item.design.id]">{{item.design.name}}</a></td>
+        <td *ngIf="!item.design"> - </td>
 
-      <td *ngIf="item.status"><a   [routerLink]="['/status/update/', item.status.id]">{{item.status.name}}</a></td>
-      <td *ngIf="!item.status"> - </td>
+        <td *ngIf="item.status"><a   [routerLink]="['/status/update/', item.status.id]">{{item.status.name}}</a></td>
+        <td *ngIf="!item.status"> - </td>
 
-      <td>{{item.openedDate}}</td>
-    </tr>
+        <td>{{item.openedDate}}</td>
+      </tr>
+    </tbody>
   </table>
 </div>
