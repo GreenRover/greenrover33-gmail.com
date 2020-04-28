@@ -8,17 +8,15 @@ import { Component, Input, OnChanges, Output, EventEmitter } from '@angular/core
 export class ToolPaginationComponent implements OnChanges {
   @Input() totalRecords = 0;
   @Input() recordsPerPage = 0;
+  @Input() activePage = 1;
 
   @Output() pageChange: EventEmitter<number> = new EventEmitter();
 
   public pages: number[] = [];
-  activePage: number;
 
   ngOnChanges() {
     const pageCount = this.getPageCount();
     this.pages = this.getArrayOfPage(pageCount);
-    this.activePage = 1;
-    this.pageChange.emit(1);
   }
 
   private getPageCount(): number {
