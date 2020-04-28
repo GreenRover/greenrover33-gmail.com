@@ -1,0 +1,12 @@
+table {
+  width: 400px;
+}
+
+/* Column Widths */
+.mat-column-zug,
+.mat-column-station,
+.mat-column-gleis {
+  max-width: 64px;
+  text-align: right;
+  justify-content: flex-end;
+}

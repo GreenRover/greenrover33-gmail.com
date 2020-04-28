@@ -1,8 +1,7 @@
 import { SBB_DMZ_BROKER } from '../variables';
 import { Injectable, Inject } from '@angular/core';
-import { range, Observable, Observer } from 'rxjs';
-
-declare const solace: any;
+import { Observable, Observer } from 'rxjs';
+import * as solace from 'solclientjs/lib-browser/solclient-debug.js';
 
 export interface SessionProperties {
   url: string;
@@ -25,6 +24,9 @@ export class SolaceSession {
     solace.SolclientFactory.setLogLevel(solace.LogLevel.DEBUG);
 
     try {
+      const factoryProps = new solace.SolclientFactoryProperties();
+      solace.SolclientFactory.init(factoryProps);
+
       this.session = solace.SolclientFactory.createSession(sessionProperties);
 
       this.session.on(solace.SessionEventCode.UP_NOTICE, (sessionEvent) => {
@@ -35,8 +37,13 @@ export class SolaceSession {
           ' - check correct parameter values and connectivity!');
       });
 
+      this.session.connect();
+
+
       this.session.on(solace.SessionEventCode.MESSAGE, message => {
-        const msg = message.getBinaryAttachment();
+        const bin: string = message.getBinaryAttachment();
+        const msg: string = bin.substring(3, bin.length - 1);
+
         const topic: string = message.getDestination().getName();
 
         const handler = this.subscriptions.get(topic);

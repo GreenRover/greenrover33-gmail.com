@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   API_BASE_PATH: 'http://127.0.0.1:8038',
   sbb_dmz_broker: {
-    url: '193.203.121.50:15443,193.203.121.52:15443',
+    url: 'wss://tms-mob-int01-public.sbb.ch:11443,wss://tms-mob-int02-public.sbb.ch:11443',
     vpnName: 'default',
     userName: 'default',
     password: 'default',

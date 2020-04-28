@@ -1,3 +1,5 @@
+import { SolaceSession } from './api/Solace.session';
+import { LtaService } from './api/lta.service';
 import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core';
 import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
@@ -19,6 +21,9 @@ import { TypService } from './api/typ.service';
     LocationService,
     StatusService,
     TypService,
+
+    SolaceSession,
+    LtaService
   ]
 })
 export class ApiModule {
