@@ -1,3 +1,4 @@
+import { ToolsModule } from './tools/tools.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MaterialModule } from './material.module';

@@ -5,9 +5,14 @@ import { ToolPaginationComponent } from './tool-pagination/tool-pagination.compo
 
 
 @NgModule({
-  declarations: [ToolPaginationComponent],
+  declarations: [
+    ToolPaginationComponent
+  ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    ToolPaginationComponent
   ]
 })
 export class ToolsModule { }

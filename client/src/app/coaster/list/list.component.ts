@@ -11,6 +11,8 @@ import { Component, OnInit } from '@angular/core';
 export class ListComponent implements OnInit {
   page: Page<Coaster> = {
     content: [],
+    number: 1,
+    totalPages: 1,
   };
 
   constructor(
