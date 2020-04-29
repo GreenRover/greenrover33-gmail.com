@@ -48,8 +48,13 @@ export class SolaceSession {
       });
 
       this.session.on(solace.SessionEventCode.MESSAGE, message => {
-        const bin: string = message.getBinaryAttachment();
-        const msg: string = bin.substring(3, bin.length - 1);
+        let msg: string;
+        if (message.getType() === solace.MessageType.TEXT) {
+          msg = message.getSdtContainer().getValue();
+        } else {
+          console.error('Only able to handle solace text msgs');
+          console.log(message);
+        }
 
         const topic: string = message.getDestination().getName();
 
@@ -82,14 +87,9 @@ export class SolaceSession {
       this.subscriptions.set(topic, callback);
     }
 
-    if (this.isConnected == null) {
+    this.isConnected.then(() => {
       this.subscribeTopic(topic, errCallback);
-    } else {
-      this.isConnected.then(() => {
-        this.subscribeTopic(topic, errCallback);
-        this.isConnected = null;
-      });
-    }
+    });
   }
 
   private subscribeTopic(topic, errCallback) {
