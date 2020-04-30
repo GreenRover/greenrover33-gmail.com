@@ -1,16 +1,30 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { LocationRoutingModule } from './location-routing.module';
-import { ListComponent } from './list/list.component';
+import { NgModule } from '@angular/core';
+import { ApiModule } from './../api/api.module';
+import { Configuration } from './../api/configuration';
+import { MaterialModule } from './../material.module';
+import { ToolsModule } from './../tools/tools.module';
 import { EditComponent } from './edit/edit.component';
+import { ListComponent } from './list/list.component';
+import { LocationRoutingModule } from './location-routing.module';
+
 
 
 @NgModule({
-  declarations: [ListComponent, EditComponent],
+  declarations: [
+    ListComponent,
+    EditComponent
+  ],
   imports: [
     CommonModule,
-    LocationRoutingModule
+    LocationRoutingModule,
+
+    ApiModule.forRoot(() => new Configuration({
+      basePath: 'http://localhost:8039',
+    })),
+
+    ToolsModule,
+    MaterialModule,
   ]
 })
 export class LocationModule { }

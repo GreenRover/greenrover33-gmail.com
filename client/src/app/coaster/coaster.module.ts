@@ -4,13 +4,18 @@ import { ApiModule } from './../api/api.module';
 import { Configuration } from './../api/configuration';
 import { MaterialModule } from './../material.module';
 import { ToolsModule } from './../tools/tools.module';
+
 import { CoasterRoutingModule } from './coaster-routing.module';
 import { DetailsComponent } from './details/details.component';
 import { EditComponent } from './edit/edit.component';
 import { ListComponent } from './list/list.component';
 
 @NgModule({
-  declarations: [ListComponent, DetailsComponent, EditComponent],
+  declarations: [
+    ListComponent,
+    DetailsComponent,
+    EditComponent
+  ],
   imports: [
     CommonModule,
     CoasterRoutingModule,
