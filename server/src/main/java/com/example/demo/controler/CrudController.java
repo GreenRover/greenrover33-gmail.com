@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,7 +58,7 @@ public abstract class CrudController<T extends HavingPK> {
 			@Parameter(description = "The items per page.", required = true) @RequestParam(value = "items", defaultValue = "25") int itemsPerPage //
 	) {
 
-		return repository.findAll(PageRequest.of(page, itemsPerPage));
+		return repository.findAll(PageRequest.of(page, itemsPerPage, Sort.by("name")));
 	}
 
 	@GetMapping(path = "{id}")
