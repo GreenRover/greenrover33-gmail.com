@@ -18,7 +18,6 @@ import lombok.Data;
 public class Location implements HavingPK {
 	@Id
 	@GeneratedValue
-	@NotNull
 	@Schema(example = "1337", required = true)
 	private Integer id = null;
 
