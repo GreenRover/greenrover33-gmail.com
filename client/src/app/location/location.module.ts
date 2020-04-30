@@ -7,6 +7,7 @@ import { ToolsModule } from './../tools/tools.module';
 import { EditComponent } from './edit/edit.component';
 import { ListComponent } from './list/list.component';
 import { LocationRoutingModule } from './location-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -17,6 +18,9 @@ import { LocationRoutingModule } from './location-routing.module';
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+
     LocationRoutingModule,
 
     ApiModule.forRoot(() => new Configuration({

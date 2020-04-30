@@ -1,4 +1,4 @@
-<span class="main_buttons"><button mat-icon-button color="primary" routerLink="/location/create"><mat-icon aria-label="Add new">add</mat-icon></button></span>
+<span class="main_buttons"><button mat-icon-button color="primary" routerLink="/location/add"><mat-icon aria-label="Add new">add</mat-icon></button></span>
 <h2>Location list</h2>
 
 <table class="table table-light table-striped">
@@ -16,7 +16,7 @@
   <tr *ngFor="let location of page.content">
    <td>{{location.name}}</td>
    <td>
-    <button mat-icon-button color="primary" [routerLink]="['/location/update/', location.id]"><mat-icon aria-label="Edit">edit</mat-icon></button>
+    <button mat-icon-button color="primary" [routerLink]="['/location/edit/', location.id]"><mat-icon aria-label="Edit">edit</mat-icon></button>
     <button mat-icon-button color="primary" (click)="delete(location.id)"><mat-icon aria-label="Delete">delete</mat-icon></button>
    </td>
   </tr>
