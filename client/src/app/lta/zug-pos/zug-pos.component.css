@@ -1,5 +1,5 @@
 table {
-  width: 400px;
+  width: 100%;
 }
 
 /* Column Widths */
@@ -9,4 +9,13 @@ table {
   max-width: 64px;
   text-align: right;
   justify-content: flex-end;
+}
+
+.mat-column-zug {
+  cursor: pointer;
+}
+
+.container-desktop {
+  width: calc(50% - 5px);
+  float: left;
 }
