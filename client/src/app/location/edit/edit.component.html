@@ -5,12 +5,17 @@
 
 <div class="container" novalidate>
   <form [formGroup]="form" (ngSubmit)="submitForm()">
+    <mat-error *ngFor="let err of globalServerError">{{err}}</mat-error>
+
     <input type="hidden" formControlName="id">
 
     <mat-form-field appearance="fill">
       <mat-label>Enter the name</mat-label>
       <input type="text" matInput formControlName="name" required>
-      <mat-error *ngIf="form.controls['name'].invalid">Name is required.</mat-error>
+      <mat-error *ngIf="form.controls['name'].invalid">
+        Name is required.
+        <div *ngFor="let err of fieldServerError?.name">{{err}}</div>
+      </mat-error>
     </mat-form-field>
 
     <div class="form-element">

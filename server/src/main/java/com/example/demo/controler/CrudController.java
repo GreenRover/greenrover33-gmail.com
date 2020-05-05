@@ -1,7 +1,6 @@
 package com.example.demo.controler;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -132,14 +131,8 @@ public abstract class CrudController<T extends HavingPK> {
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ResponseBody
-	public ResponseEntity<String> validationError(MethodArgumentNotValidException ex) {
+	public ResponseEntity<List<FieldError>> validationError(MethodArgumentNotValidException ex) {
 		BindingResult result = ex.getBindingResult();
-		List<FieldError> fieldErrors = result.getFieldErrors();
-
-		String errors = fieldErrors.stream() //
-				.map(x -> x.getField() + " = " + x.getDefaultMessage()) //
-				.collect(Collectors.joining("\n"));
-
-		return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(result.getFieldErrors(), HttpStatus.BAD_REQUEST);
 	}
 }
