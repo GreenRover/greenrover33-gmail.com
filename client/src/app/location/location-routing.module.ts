@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'location', redirectTo: 'location/list/1', pathMatch: 'full' },
   { path: 'location/list', redirectTo: 'location/list/1', pathMatch: 'full' },
   { path: 'location/list/:page', component: ListComponent },
+  // { path: 'location/list/:page/:nameFilter', component: ListComponent },
   { path: 'location/add', component: EditComponent },
   { path: 'location/edit', component: EditComponent },
   { path: 'location/edit/:id', component: EditComponent }

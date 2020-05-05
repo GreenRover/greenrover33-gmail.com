@@ -17,18 +17,35 @@ import { Typ } from './typ';
 /**
  * A roaler coaster
  */
-export interface Coaster { 
-    id: number;
-    /**
-     * The name of the roaler coaster
-     */
-    name: string;
-    location?: Location;
-    typ?: Typ;
-    design?: Design;
-    status?: Status;
-    /**
-     * The opening date of this roaler coaster
-     */
-    openedDate?: string;
+export class Coaster {
+  id: number;
+  /**
+   * The name of the roaler coaster
+   */
+  name: string;
+  location?: Location;
+  typ?: Typ;
+  design?: Design;
+  status?: Status;
+  /**
+   * The opening date of this roaler coaster
+   */
+  openedDate?: string;
+
+  public static fromJson(raw: any): Coaster {
+    raw.openedDate = raw.opened_date;
+    delete raw.opened_date;
+
+    return Object.assign(new Coaster(), raw);
+  }
+
+  public toJSON(): any {
+    const raw: any = this;
+    raw.opened_date = raw.openedDate;
+    return raw;
+  }
+
+  public getOpenDateAsDate(): Date {
+    return new Date(this.openedDate);
+  }
 }

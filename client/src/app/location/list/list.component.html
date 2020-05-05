@@ -1,6 +1,13 @@
 <span class="main_buttons"><button mat-icon-button color="primary" routerLink="/location/add"><mat-icon aria-label="Add new">add</mat-icon></button></span>
 <h2>Location list</h2>
 
+<div style="clear: both;"></div>
+
+<mat-form-field appearance="fill" style="width: 100%">
+  <mat-label>Name filter</mat-label>
+  <input type="text" matInput #filterName (keyup)="filterForm($event)" [value]="searchFilterValue">
+</mat-form-field>
+
 <table class="table table-light table-striped">
  <thead class="thead-dark">
   <tr>

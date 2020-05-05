@@ -56,7 +56,7 @@ public abstract class CrudController<T extends HavingPK> {
 	public Page<T> paged( //
 			@Parameter(description = "The page to show.", required = true) @RequestParam(value = "page", defaultValue = "1") int page, //
 			@Parameter(description = "The items per page.", required = true) @RequestParam(value = "items", defaultValue = "25") int itemsPerPage, //
-			@Parameter(description = "Filter for name", required = false) @RequestParam(value = "nameFilter") String nameFilter //
+			@Parameter(description = "Filter for name", required = false) @RequestParam(value = "nameFilter", required = false) String nameFilter //
 	) {
 		PageRequest pageRequest = PageRequest.of(page, itemsPerPage, Sort.by("name"));
 		

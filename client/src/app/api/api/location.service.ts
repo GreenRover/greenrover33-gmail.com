@@ -231,10 +231,10 @@ export class LocationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public paged(page: number, items: number, observe?: 'body', reportProgress?: boolean): Observable<Page<Location>>;
-    public paged(page: number, items: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Page<Location>>>;
-    public paged(page: number, items: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Page<Location>>>;
-    public paged(page: number, items: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public paged(page: number, items: number, searchString?: string, observe?: 'body', reportProgress?: boolean): Observable<Page<Location>>;
+    public paged(page: number, items: number, searchString?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Page<Location>>>;
+    public paged(page: number, items: number, searchString?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Page<Location>>>;
+    public paged(page: number, items: number, searchString?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (page === null || page === undefined) {
             throw new Error('Required parameter page was null or undefined when calling paged2.');
@@ -250,6 +250,9 @@ export class LocationService {
         }
         if (items !== undefined && items !== null) {
             queryParameters = queryParameters.set('items', <any>items);
+        }
+        if (searchString !== undefined && searchString !== null) {
+            queryParameters = queryParameters.set('nameFilter', <string>searchString);
         }
 
         let headers = this.defaultHeaders;

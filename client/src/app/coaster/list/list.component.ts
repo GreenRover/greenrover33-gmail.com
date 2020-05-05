@@ -35,6 +35,7 @@ export class ListComponent implements OnInit {
   private loadPage(p: number) {
     this.coasterApi.paged((p - 1), 25).subscribe(page => {
       this.page = page;
+      // console.log(page.content[0].getOpenDateAsDate());
       console.log(page);
     });
   }
