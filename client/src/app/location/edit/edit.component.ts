@@ -14,7 +14,9 @@ export class EditComponent implements OnInit {
   form: FormGroup;
   editing: string;
   globalServerError: string[] = [];
-  fieldServerError: { [key: string]: string[] } = {};
+
+  // Map<String, List<String>>
+  fieldServerError: { [key: string]: Array<string> } = {};
 
   constructor(
     private fb: FormBuilder,
@@ -76,9 +78,10 @@ export class EditComponent implements OnInit {
         if (field == null) {
           this.globalServerError.push(e.field + ': ' + e.defaultMessage);
         } else {
-          field.setErrors({ server: true});
+          field.setErrors({ server: true });
           field.markAsDirty();
 
+          // fieldServerError.computeIfAbsent(t -> new ArrayList())
           if (!this.fieldServerError[e.field]) {
             this.fieldServerError[e.field] = [];
           }

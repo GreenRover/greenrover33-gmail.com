@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.example.demo.api.GenericError;
 import com.example.demo.model.HavingPK;
+import com.example.demo.repos.RepositoryHavingName;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -40,7 +41,7 @@ import lombok.AllArgsConstructor;
 @SuppressWarnings("rawtypes")
 @AllArgsConstructor
 public abstract class CrudController<T extends HavingPK> {
-	private final JpaRepository<T, Integer> repository;
+	private final RepositoryHavingName<T> repository;
 
 	@GetMapping(path = "")
 	@ResponseBody
@@ -54,10 +55,16 @@ public abstract class CrudController<T extends HavingPK> {
 	@Operation(description = "Receive a list of objects, paged")
 	public Page<T> paged( //
 			@Parameter(description = "The page to show.", required = true) @RequestParam(value = "page", defaultValue = "1") int page, //
-			@Parameter(description = "The items per page.", required = true) @RequestParam(value = "items", defaultValue = "25") int itemsPerPage //
+			@Parameter(description = "The items per page.", required = true) @RequestParam(value = "items", defaultValue = "25") int itemsPerPage, //
+			@Parameter(description = "Filter for name", required = false) @RequestParam(value = "nameFilter") String nameFilter //
 	) {
-
-		return repository.findAll(PageRequest.of(page, itemsPerPage, Sort.by("name")));
+		PageRequest pageRequest = PageRequest.of(page, itemsPerPage, Sort.by("name"));
+		
+		if (StringUtils.isEmpty(nameFilter)) {
+			return repository.findAll(pageRequest);
+		} else {
+			return repository.findByNameStartingWith(nameFilter, pageRequest);
+		}
 	}
 
 	@GetMapping(path = "{id}")

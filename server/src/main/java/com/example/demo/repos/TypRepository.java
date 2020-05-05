@@ -1,11 +1,10 @@
 package com.example.demo.repos;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.Typ;
 
 @Repository
-public interface TypRepository extends JpaRepository<Typ, Integer>{
+public interface TypRepository extends RepositoryHavingName<Typ> {
 		
 }
