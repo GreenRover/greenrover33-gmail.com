@@ -1,20 +1,18 @@
-import { ToolsModule } from './tools/tools.module';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MaterialModule } from './material.module';
-import { TypModule } from './typ/typ.module';
-import { StatusModule } from './status/status.module';
-import { LocationModule } from './location/location.module';
-import { DesignModule } from './design/design.module';
-import { CoasterModule } from './coaster/coaster.module';
-
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from '../environments/environment';
+import { BASE_PATH, SBB_DMZ_BROKER } from './api/variables';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { CoasterModule } from './coaster/coaster.module';
+import { DesignModule } from './design/design.module';
+import { LocationModule } from './location/location.module';
+import { MaterialModule } from './material.module';
+import { StatusModule } from './status/status.module';
+import { TypModule } from './typ/typ.module';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +33,13 @@ import { HttpClientModule } from '@angular/common/http';
 
     MaterialModule
   ],
-  providers: [],
+  providers: [{
+    provide: BASE_PATH,
+    useValue: environment.API_BASE_PATH
+  }, {
+    provide: SBB_DMZ_BROKER,
+    useValue: environment.sbb_dmz_broker
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

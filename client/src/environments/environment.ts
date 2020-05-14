@@ -3,7 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  API_BASE_PATH: 'http://localhost:8038',
+  sbb_dmz_broker: {
+    url: 'wss://tms-mob-int01-public.sbb.ch:11443,wss://tms-mob-int02-public.sbb.ch:11443',
+    vpnName: 'default',
+    userName: 'default',
+    password: 'default',
+  }
 };
 
 /*
