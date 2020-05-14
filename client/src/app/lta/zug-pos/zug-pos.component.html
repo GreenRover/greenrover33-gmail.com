@@ -1,1 +1,18 @@
-<p>zug-pos works!</p>
+<h2>zug-pos</h2>
+
+<table class="table table-light table-striped">
+ <thead class="thead-dark">
+  <tr>
+   <th scope="col">Zug</th>
+   <th scope="col">Station</th>
+   <th scope="col">Gleis</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr *ngFor="let zPos of zugPos | objectValues">
+   <td>{{zPos.zug || "-"}}</td>
+   <td>{{zPos.station || "-"}}</td>
+   <td>{{zPos.gleis || "-"}}</td>
+  </tr>
+ </tbody>
+</table>
