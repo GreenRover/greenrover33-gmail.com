@@ -18,7 +18,7 @@ export class LtaService {
   ) { }
 
 
-  public subscribeZnv(): Observable<ZnvMessage> {
+  public znv(): Observable<ZnvMessage> {
     return this.solSession.subcribeTopic('tms/iad/operatingstate/' + this.stage + '/v1/znv/>').pipe( //
       map(res => {
         return JSON.parse(res);
@@ -26,7 +26,7 @@ export class LtaService {
     );
   }
 
-  public subscribeTzde(): Observable<TzdeMessage> {
+  public tzde(): Observable<TzdeMessage> {
     return this.solSession.subcribeTopic('tms/iad/operatingstate/' + this.stage + '/v1/tzde/>').pipe( //
       map(res => {
         return JSON.parse(res);
@@ -34,7 +34,7 @@ export class LtaService {
     );
   }
 
-  public subscribeElz(): Observable<ElzMessage> {
+  public elz(): Observable<ElzMessage> {
     return this.solSession.subcribeTopic('tms/iad/operatingstate/' + this.stage + '/v1/elz/>').pipe( //
       map(res => {
         return JSON.parse(res);

@@ -15,7 +15,7 @@ export class SolaceSession {
   private session;
   private subscriptions = new Map<string, (data: string) => void>();
   private wildcardSubscriptions = new Map<string, (data: string) => void>();
-  private isConnected: Promise<any>;
+  private whenConnected: Promise<any>;
 
   constructor(@Inject(SBB_DMZ_BROKER) sessionProperties: SessionProperties) {
     solace.SessionProperties.connectTimeoutInMsecs = 30 * 1000;
@@ -35,7 +35,7 @@ export class SolaceSession {
           ' - check correct parameter values and connectivity!');
       });
 
-      this.isConnected = new Promise((resolve, reject) => {
+      this.whenConnected = new Promise((resolve, reject) => {
         try {
           this.session.on(solace.SessionEventCode.UP_NOTICE, (sessionEvent) => {
             resolve();
@@ -87,7 +87,7 @@ export class SolaceSession {
       this.subscriptions.set(topic, callback);
     }
 
-    this.isConnected.then(() => {
+    this.whenConnected.then(() => {
       this.subscribeTopic(topic, errCallback);
     });
   }
