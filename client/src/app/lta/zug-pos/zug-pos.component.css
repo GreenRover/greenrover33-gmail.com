@@ -1,0 +1,17 @@
+table {
+  width: 100%;
+}
+
+/* Column Widths */
+.mat-column-zug,
+.mat-column-station,
+.mat-column-gleis {
+  max-width: 64px;
+  text-align: right;
+  justify-content: flex-end;
+}
+
+.mat-column-zug {
+  cursor: pointer;
+}
+

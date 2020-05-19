@@ -1,3 +1,4 @@
+import { MaterialModule } from './../material.module';
 import { ZugPosDb } from './zug-pos/zug-pos-db.service';
 import { ToolsModule } from './../tools/tools.module';
 import { NgModule } from '@angular/core';
@@ -14,7 +15,9 @@ import { ZugPosComponent } from './zug-pos/zug-pos.component';
   imports: [
     CommonModule,
     LtaRoutingModule,
-    ToolsModule
+    ToolsModule,
+
+    MaterialModule
   ],
   providers: [
     ZugPosDb
