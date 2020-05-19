@@ -1,3 +1,4 @@
+import { ZugPosDb, ZugPos } from './zug-pos-db.service';
 import { ChangeDetectorRef, Component, OnInit, ViewContainerRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { bufferTime, filter } from 'rxjs/operators';
 import { LtaService } from './../../api/api/lta.service';
@@ -5,16 +6,16 @@ import { LtaService } from './../../api/api/lta.service';
 @Component({
   selector: 'app-zug-pos',
   templateUrl: './zug-pos.component.html',
-  styleUrls: ['./zug-pos.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./zug-pos.component.css']
 })
 export class ZugPosComponent implements OnInit {
   constructor(
     private ltaService: LtaService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private zugPosDb: ZugPosDb
   ) { }
 
-  public zugPos: { [key: string ]: ZugPos} = {};
+  public zugPos: ZugPos[] = [];
 
   numberOfTicks = 0;
   // public zugPosList: ZugPos[] = [];
@@ -24,31 +25,25 @@ export class ZugPosComponent implements OnInit {
       .pipe(
         filter(znt => znt.typ === 'ORT'),
         filter(znt => Boolean(znt.bisZugIdentifikation.zugnummer)),
-        bufferTime(100)
+        bufferTime(1000)
       )
       .subscribe(znts => {
         console.log(znts);
 
-        const zugPosCopy = Object.assign({}, this.zugPos);
-        for (const zn of znts) {
-          this.zugPos[zn.bisZugIdentifikation.zugnummer] = {
-            zug: zn.bisZugIdentifikation.zugnummer,
-            station: zn.bisStation,
-            gleis: zn.bisGleisName
-          };
-        }
+        this.zugPosDb.saveZugPos(
+          znts.map(zn => {
+            return {
+              zug: zn.bisZugIdentifikation.zugnummer,
+              station: zn.bisStation,
+              gleis: zn.bisGleisName
+            };
+          })
+        );
 
-        // this.zugPos = zugPosCopy;
-        this.cdr.detectChanges();
-        this.cdr.markForCheck();
+        this.zugPosDb.getLatesPosPerZug()
+          .then(zugPositions => this.zugPos = zugPositions);
 
         // this.zugPosList = Object.values(this.zugPos);
       });
   }
-}
-
-interface ZugPos {
-  zug: string;
-  station: string;
-  gleis: string;
 }
