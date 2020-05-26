@@ -1,4 +1,4 @@
-import { ZugPosDetailComponent } from './zug-pos/zug-pos.detail.component';
+import { ZugPosDetailComponent, ZugPosDetailDialogComponent } from './zug-pos/zug-pos.detail.component';
 import { ZugPosListComponent } from './zug-pos/zug-pos.list.component';
 import { MaterialModule } from './../material.module';
 import { ZugPosDb } from './zug-pos/zug-pos-db.service';
@@ -14,7 +14,8 @@ import { ZugPosComponent } from './zug-pos/zug-pos.component';
   declarations: [
     ZugPosComponent,
     ZugPosListComponent,
-    ZugPosDetailComponent
+    ZugPosDetailComponent,
+    ZugPosDetailDialogComponent
   ],
   imports: [
     CommonModule,

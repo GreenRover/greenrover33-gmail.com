@@ -51,4 +51,8 @@ export class ZugPosListComponent implements OnInit {
   displayZugDetails(zugNummer) {
     this.zugSelected.emit(zugNummer);
   }
+
+  public sayHallo(postion: string) {
+    console.log('Hallo ' + postion);
+  }
 }

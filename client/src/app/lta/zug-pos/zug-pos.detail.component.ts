@@ -1,6 +1,7 @@
+import { Component, Input, OnChanges, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ZugPosDb } from './zug-pos-db.service';
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-zug-pos-detail',
@@ -25,4 +26,25 @@ export class ZugPosDetailComponent implements OnChanges {
     });
   }
 
+}
+
+
+
+@Component({
+  selector: 'app-zug-pos-dialog-detail',
+  templateUrl: './zug-pos.detail.component.html',
+  styleUrls: ['./zug-pos.detail.component.css']
+})
+export class ZugPosDetailDialogComponent extends ZugPosDetailComponent {
+  constructor(
+    zugPosDb: ZugPosDb,
+    @Inject(MAT_DIALOG_DATA) data
+  ) {
+    super(zugPosDb);
+
+    if (data && data.zugNr) {
+      this.zugNummer = data.zugNr;
+      this.ngOnChanges();
+    }
+  }
 }
