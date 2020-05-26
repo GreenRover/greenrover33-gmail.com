@@ -68,6 +68,31 @@ export class ZugPosDb {
       });
     });
   }
+
+  public getZugHistory(zug: string): Promise<ZugPos[]> {
+    console.log('getZugHistory', zug);
+
+    return new Promise((resolve, reject) => {
+      this.db.transaction((tx) => {
+        tx.executeSql('SELECT ' +
+          '  p.zug, ' +
+          '  p.station, ' +
+          '  p.gleis, ' +
+          '  p.time ' +
+          'FROM position p ' +
+          'WHERE p.zug = ? ' +
+          'ORDER BY p.time DESC',
+          [zug], (_, zugPos) => {
+            const res = [];
+            for (const row of zugPos.rows) {
+              res.push(row);
+            }
+
+            resolve(res);
+          }, err => reject(err));
+      });
+    });
+  }
 }
 
 export interface ZugPos {

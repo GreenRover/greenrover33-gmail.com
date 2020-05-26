@@ -1,3 +1,5 @@
+import { ZugPosDetailComponent } from './zug-pos/zug-pos.detail.component';
+import { ZugPosListComponent } from './zug-pos/zug-pos.list.component';
 import { MaterialModule } from './../material.module';
 import { ZugPosDb } from './zug-pos/zug-pos-db.service';
 import { ToolsModule } from './../tools/tools.module';
@@ -10,7 +12,9 @@ import { ZugPosComponent } from './zug-pos/zug-pos.component';
 
 @NgModule({
   declarations: [
-    ZugPosComponent
+    ZugPosComponent,
+    ZugPosListComponent,
+    ZugPosDetailComponent
   ],
   imports: [
     CommonModule,
