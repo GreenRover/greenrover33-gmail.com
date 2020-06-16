@@ -1,3 +1,5 @@
+import { ChatRoutingModule } from './chat/chat-routing.module';
+import { ChatModule } from './chat/chat.module';
 import { LtaModule } from './lta/lta.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -23,6 +25,8 @@ import { TypModule } from './typ/typ.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ChatModule,
+    ChatRoutingModule,
 
     HttpClientModule,
 

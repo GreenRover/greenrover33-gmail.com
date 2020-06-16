@@ -1,0 +1,16 @@
+<div class="container" novalidate>
+  <form [formGroup]="form" (ngSubmit)="submitForm()">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Enter the name</mat-label>
+      <input type="text" matInput formControlName="name" required>
+      <mat-error *ngIf="form.controls['name'].invalid">
+        Name is required.
+      </mat-error>
+    </mat-form-field>
+
+    <div class="form-element">
+      <button mat-raised-button color="primary" type="submit" class="button" [disabled]="form.pristine || form.invalid">Submit</button>
+    </div>
+  </form>
+</div>

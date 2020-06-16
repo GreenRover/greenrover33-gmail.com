@@ -1,18 +1,19 @@
 import { ZugPosDetailComponent, ZugPosDetailDialogComponent } from './zug-pos.detail.component';
 import { ApplicationStateService } from './../../tools/applicationState.service';
 import { ZugPosListComponent } from './zug-pos.list.component';
-import { Component, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren, QueryList, OnDestroy } from '@angular/core';
 import { bufferTime, filter } from 'rxjs/operators';
 import { LtaService } from './../../api/api/lta.service';
 import { ZugPos, ZugPosDb } from './zug-pos-db.service';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-zug-pos',
   templateUrl: './zug-pos.component.html',
   styleUrls: ['./zug-pos.component.css']
 })
-export class ZugPosComponent implements OnInit {
+export class ZugPosComponent implements OnInit, OnDestroy {
 
   constructor(
     private ltaService: LtaService,
@@ -21,8 +22,11 @@ export class ZugPosComponent implements OnInit {
     public dialog: MatDialog
   ) { }
 
+
   public zugPos: ZugPos[] = [];
   public currentZug = '';
+
+  private subLtaZugPos: Subscription;
 
   @ViewChild('dasSucheIch')
   dieZugListe: ZugPosListComponent;
@@ -31,12 +35,13 @@ export class ZugPosComponent implements OnInit {
   dieZugListen: QueryList<ZugPosListComponent>;
 
   ngOnInit(): void {
-    this.ltaService.znv() //
+    this.subLtaZugPos = this.ltaService.znv() //
       .pipe(
         filter(znt => znt.typ === 'ORT'),
         filter(znt => Boolean(znt.bisZugIdentifikation.zugnummer)),
         bufferTime(1000)
       )
+
       .subscribe(znts => {
         console.log(znts);
 
@@ -53,6 +58,11 @@ export class ZugPosComponent implements OnInit {
         this.zugPosDb.getLatesPosPerZug()
           .then(zugPositions => this.zugPos = zugPositions);
       });
+  }
+
+  ngOnDestroy(): void {
+    console.log("on destroy subscribe...");
+    this.subLtaZugPos.unsubscribe();
   }
 
   displayZugDetails(zugNummer) {

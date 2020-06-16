@@ -51,6 +51,8 @@ export class SolaceSession {
         let msg: string;
         if (message.getType() === solace.MessageType.TEXT) {
           msg = message.getSdtContainer().getValue();
+        } else if (message.getType() === solace.MessageType.BINARY) {
+          msg = message.getBinaryAttachment();
         } else {
           console.error('Only able to handle solace text msgs');
           console.log(message);
@@ -118,7 +120,17 @@ export class SolaceSession {
       } catch (e) {
         observer.error(e);
       }
+      return () => {
+        this.unsubscribe(topic);
+      };
     });
+  }
+  unsubscribe(topic: string) {
+    this.session.unsubscribe(solace.SolclientFactory.createTopicDestination(topic),
+      true, // generate confirmation when subscription is added successfully
+      topic, // use topic name as correlation key
+      10000 // 10 seconds timeout for this operation
+    );
   }
 
   public publish(topicName: string, content: string) {
