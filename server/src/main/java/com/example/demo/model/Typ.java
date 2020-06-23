@@ -5,7 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.BatchSize;
 import org.springframework.validation.annotation.Validated;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -13,7 +12,6 @@ import lombok.Data;
 
 @Data
 @Entity(name = "typ")
-@BatchSize(size = 1000)
 @Validated
 public class Typ implements HavingPK {
 	@Id
