@@ -1,8 +1,11 @@
+import { TestBed } from '@angular/core/testing';
+import { ChatService } from './chat.service';
 import { LoginComponent } from './../login/login.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Component, OnInit, AfterViewInit, Input, Output } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTable } from '@angular/material/table';
+import { ChatMessage } from './chat.message';
 
 @Component({
   selector: 'app-chat',
@@ -12,12 +15,16 @@ import { MatTableDataSource } from '@angular/material/table';
 export class ChatComponent implements OnInit, AfterViewInit {
   userName: string;
   form: FormGroup;
-  public dataSource = new MatTableDataSource<Nachricht>();
+  public dataSource = new MatTableDataSource<ChatMessage>();
   public displayedColumns: string[] = ['text'];
+
+  @ViewChild (MatTable, {static: true})
+  private table;
 
   constructor( //
     public dialog: MatDialog, //
-    private fb: FormBuilder //
+    private fb: FormBuilder, //
+    private chatService: ChatService,
   ) { }
 
   ngAfterViewInit(): void {
@@ -25,30 +32,29 @@ export class ChatComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().toPromise().then(result => {
       this.userName = result;
     });
+
+    this.chatService.getFluxMessages().subscribe((chatMessage) => {
+      this.dataSource.data.push(chatMessage);
+      this.table.renderRows();
+    })
   }
 
   submitMessage(): void {
-    const d = this.dataSource.data;
-    d.push({text: this.form.value.text});
-    this.dataSource.data = d;
+    console.log("message submit: " + this.form.value.text);
+    this.chatService.saveChatMessage({
+      from: this.userName,
+      timeStamp: Date.now(),
+      text: this.form.value.text,
+    });
   }
 
-  @Input()
-  public set nachrichten(nachrichten: Nachricht[]) {
-    this.dataSource.data = nachrichten;
-  }
 
   ngOnInit(): void {
-    this.dataSource.data = [{text: 'Tag'}, {text: 'wie gehts'}, {text: 'denn so?'}];
     this.form = this.fb.group({
       text: ['erlenried']
     });
  }
 
 
-}
-
-export interface Nachricht {
-  text: string;
 }
 

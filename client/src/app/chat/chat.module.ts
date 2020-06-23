@@ -1,3 +1,4 @@
+import { ChatService } from './chat/chat.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './../material.module';
 import { ToolsModule } from './../tools/tools.module';
@@ -13,6 +14,9 @@ import { ChatComponent } from './chat/chat.component';
   declarations: [
     ChatComponent,
     LoginComponent,
+  ],
+  providers: [
+    ChatService,
   ],
   imports: [
     CommonModule,
