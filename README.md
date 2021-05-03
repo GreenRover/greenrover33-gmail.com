@@ -17,9 +17,18 @@
 #### Requirements:
 - java
 - maven
-- an java ide (host used eclipse, but intellij might be better)
+- an java ide (host used intellij)
 - web browser like google chrome or firefox
 - internet
+
+#### Preparations
+
+```
+cd client
+npm install
+cd ../server
+mvn package
+```
 
 ## Subject backlog
 - Angular project setup + hello world

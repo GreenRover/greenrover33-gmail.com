@@ -49,8 +49,8 @@ export class SolaceSession {
 
       this.session.on(solace.SessionEventCode.MESSAGE, message => {
         let msg: string;
-        if (message.getType() === solace.MessageType.TEXT) {
-          msg = message.getSdtContainer().getValue();
+        if (message.getType() === solace.MessageType.BINARY) {
+          msg = message.getBinaryAttachment();
         } else {
           console.error('Only able to handle solace text msgs');
           console.log(message);

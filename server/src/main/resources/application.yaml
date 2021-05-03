@@ -9,9 +9,9 @@ spring:
   datasource:
     initialization-mode: never
     platform: postgres
-    url: "jdbc:postgresql://db-postgresql-fra1-39545-do-user-2658320-0.a.db.ondigitalocean.com:25060/db1"
+    url: "jdbc:postgresql://db-postgresql-fra1-39545-do-user-2658320-0.b.db.ondigitalocean.com:25060/dbX"
     username: user
-    password: ttay3lh08nfddlx0
+    password: mtivwpb48y98e91v
 
 
 server:
