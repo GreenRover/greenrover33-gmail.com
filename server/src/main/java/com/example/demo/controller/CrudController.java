@@ -72,9 +72,9 @@ public abstract class CrudController<T extends HavingPK> {
 	@ResponseBody
 	@Operation(description = "Create new object")
 	@ApiResponses(value = { //
-			@ApiResponse(responseCode = "201", description = "object was succesfull created"), //
+			@ApiResponse(responseCode = "201", description = "object was successfully created"), //
 			@ApiResponse(responseCode = "400", description = "the given input is invalid", content = @Content(schema = @Schema(implementation = String.class))), //
-			@ApiResponse(responseCode = "500", description = "something unexpected went verry wrong.", content = @Content(schema = @Schema(implementation = GenericError.class))) //
+			@ApiResponse(responseCode = "500", description = "something unexpected went very wrong.", content = @Content(schema = @Schema(implementation = GenericError.class))) //
 	})
 	public ResponseEntity create( //
 			@Valid @RequestBody T newObject) {
@@ -89,10 +89,10 @@ public abstract class CrudController<T extends HavingPK> {
 	@ResponseBody
 	@Operation(description = "Update an object")
 	@ApiResponses(value = { //
-			@ApiResponse(responseCode = "200", description = "object was succesfull updated"), //
+			@ApiResponse(responseCode = "200", description = "object was successfully updated"), //
 			@ApiResponse(responseCode = "400", description = "the given input is invalid", content = @Content(schema = @Schema(implementation = String.class))), //
-			@ApiResponse(responseCode = "404", description = "object dosent exist"), //
-			@ApiResponse(responseCode = "500", description = "something unexpected went verry wrong.", content = @Content(schema = @Schema(implementation = GenericError.class))) //
+			@ApiResponse(responseCode = "404", description = "object doesn't exist"), //
+			@ApiResponse(responseCode = "500", description = "something unexpected went very wrong.", content = @Content(schema = @Schema(implementation = GenericError.class))) //
 	})
 	public ResponseEntity update( //
 			@Parameter(description = "The id of the object to update.", required = true) @PathVariable("id") int id, //
@@ -112,9 +112,9 @@ public abstract class CrudController<T extends HavingPK> {
 	@ResponseBody
 	@Operation(description = "Delete an object")
 	@ApiResponses(value = { //
-			@ApiResponse(responseCode = "200", description = "object was succesfull deleted"), //
-			@ApiResponse(responseCode = "404", description = "object dosent exist"), //
-			@ApiResponse(responseCode = "500", description = "something unexpected went verry wrong.", content = @Content(schema = @Schema(implementation = GenericError.class))) //
+			@ApiResponse(responseCode = "200", description = "object was successfully deleted"), //
+			@ApiResponse(responseCode = "404", description = "object doesn't exist"), //
+			@ApiResponse(responseCode = "500", description = "something unexpected went very wrong.", content = @Content(schema = @Schema(implementation = GenericError.class))) //
 	})
 	public ResponseEntity delete( //
 			@Parameter(description = "The id of the object to delete.", required = true) @PathVariable("id") int id) {

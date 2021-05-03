@@ -1,0 +1,4 @@
+<div *ngIf="user$ | async as user">
+  <img *ngIf="user.picture" src="{{user.picture}}"/>
+  <span *ngIf="user.name">{{ user.name }}</span>
+</div>

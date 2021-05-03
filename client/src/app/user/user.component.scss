@@ -1,0 +1,15 @@
+:host {
+  vertical-align: middle;
+
+  > div {
+    > clr-icon {
+      margin-right: 0.4rem;
+    }
+
+    > img {
+      height: 24px;
+      width: 24px;
+      margin-right: 0.2rem;
+    }
+  }
+}

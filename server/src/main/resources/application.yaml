@@ -9,13 +9,29 @@ spring:
   datasource:
     initialization-mode: never
     platform: postgres
-    url: "jdbc:postgresql://db-postgresql-fra1-39545-do-user-2658320-0.b.db.ondigitalocean.com:25060/dbX"
+    url: "jdbc:postgresql://db-postgresql-fra1-39545-do-user-2658320-0.b.db.ondigitalocean.com:25060/db1"
     username: user
     password: mtivwpb48y98e91v
-
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-adhggyp0.eu.auth0.com/
+        audience: http://localhost:4200
 
 server:
   port: 8038
+
+logging:
+  level:
+    root: INFO
+    com:
+      example: ${LOG_LEVEL:INFO}
+    org:
+      springframework:
+        web: ${LOG_LEVEL:INFO}
+        http:
+          client: ${LOG_LEVEL:INFO}
   
   
 management:

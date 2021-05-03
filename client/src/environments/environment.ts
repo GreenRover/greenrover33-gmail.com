@@ -10,7 +10,20 @@ export const environment = {
     vpnName: 'lta-int',
     userName: 'heiko',
     password: 'geheim',
-  }
+  },
+  authConfig: {
+    issuer: 'https://dev-adhggyp0.eu.auth0.com/',
+    logoutUrl: 'https://dev-adhggyp0.eu.auth0.com/v2/logout',
+    clientId: '9ehf1SapVNXY7BRtlzbvlkQm8yxdVgcj',
+    customQueryParams: {
+      audience: 'http://localhost:4200',
+    },
+    redirectUri: window.location.origin,
+    scope: 'openid profile email',
+    responseType: 'code',
+    waitForTokenInMsec: 10_000,
+    showDebugInformation: true
+  },
 };
 
 /*

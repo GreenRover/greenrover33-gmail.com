@@ -17,9 +17,23 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
+import { AuthConfig, OAuthModule, OAuthModuleConfig, OAuthStorage, ValidationHandler } from 'angular-oauth2-oidc';
+import { JwksValidationHandler } from 'angular-oauth2-oidc-jwks';
+import { UserComponent } from "./user/user.component";
+
+const authModuleConfig: OAuthModuleConfig = {
+  resourceServer: {
+    allowedUrls: [
+      environment.API_BASE_PATH,
+    ],
+    sendAccessToken: true
+  }
+};
+
 @NgModule({
   declarations: [
     AppComponent,
+    UserComponent,
   ],
   imports: [
     HttpClientModule,
@@ -36,15 +50,19 @@ import { HttpClientModule } from '@angular/common/http';
 
     LtaModule,
 
-    MaterialModule
+    MaterialModule,
+
+    OAuthModule.forRoot(authModuleConfig),
   ],
-  providers: [{
-    provide: BASE_PATH,
-    useValue: environment.API_BASE_PATH
-  }, {
-    provide: SBB_DMZ_BROKER,
-    useValue: environment.sbb_dmz_broker
-  }],
+  providers: [
+    { provide: BASE_PATH, useValue: environment.API_BASE_PATH },
+    { provide: SBB_DMZ_BROKER, useValue: environment.sbb_dmz_broker },
+
+    { provide: OAuthModuleConfig, useValue: authModuleConfig },
+    { provide: AuthConfig, useValue: environment.authConfig },
+    { provide: OAuthStorage, useValue: localStorage },
+    { provide: ValidationHandler, useClass: JwksValidationHandler },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
