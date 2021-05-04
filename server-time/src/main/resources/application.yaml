@@ -1,0 +1,31 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-adhggyp0.eu.auth0.com/
+        audience: http://localhost:4200
+
+server:
+  port: 8039
+
+logging:
+  level:
+    root: INFO
+    com:
+      example: ${LOG_LEVEL:INFO}
+    org:
+      springframework:
+        web: ${LOG_LEVEL:INFO}
+        http:
+          client: ${LOG_LEVEL:INFO}
+  
+  
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
