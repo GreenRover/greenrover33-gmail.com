@@ -19,6 +19,17 @@ spring:
           issuer-uri: https://dev-adhggyp0.eu.auth0.com/
         audience: http://localhost:4200
 
+
+restapi:
+  time-service:
+    uri: http://localhost:8039
+    audience: http://localhost:4200
+    oauth2-client:
+      client-id: qMspHej5iXd5h4ukMiMlcJaRG5LUaBVt
+      client-secret: WyoZEApH0D3Iwhqyin5McN-QHf0ch0vZ_GNAWeOvf5VnRzXEli8projDyKAWpUnM
+      access-token-uri: https://dev-adhggyp0.eu.auth0.com/oauth/token
+      client-authentication-scheme: form
+
 server:
   port: 8038
 
@@ -30,10 +41,10 @@ logging:
     org:
       springframework:
         web: ${LOG_LEVEL:INFO}
+        client: DEBUG
         http:
           client: ${LOG_LEVEL:INFO}
-  
-  
+
 management:
   endpoints:
     web:

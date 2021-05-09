@@ -16,5 +16,6 @@ public class LocationController extends CrudController<Location> {
 	public LocationController(LocationRepository repository) {
 		super(repository);
 	}
-	
+
+
 }
